@@ -19,6 +19,10 @@
         <swiper :list="shopBanner">
         </swiper>
       </div>
+      <!-- 3 * 1 显示 -->
+      <wrap-link>
+
+      </wrap-link>
       <!-- 品牌 -->
       <cat-box :cats="brandList" :title="'单车品牌'">
       </cat-box>
@@ -42,6 +46,7 @@ import ProductWrap from 'components/ProductWrap.vue'
 import ProductItem from 'components/ProductItem.vue'
 import ScrollerBox from 'components/ScrollerBox.vue'
 import GoodGrid from 'components/GoodGrid.vue'
+import WrapLink from 'components/WrapLink.vue'
 import { Swiper, SwiperItem, Popup, ViewBox } from 'vux'
 import BScroll from 'better-scroll'
 
@@ -58,7 +63,8 @@ export default {
     ScrollerBox,
     SharePopup,
     ViewBox,
-    ProductWrap
+    ProductWrap,
+    WrapLink
   },
   data () {
     return {
