@@ -8,6 +8,7 @@ import Icon from 'vue-awesome/components/Icon'
 import { get, post } from './api/index.js'
 import store from './store'
 import { Flexbox, FlexboxItem } from 'vux'
+import './style/app.styl'
 Vue.component('icon', Icon)
 
 // 全局注册vux组件
