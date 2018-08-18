@@ -1,18 +1,6 @@
 <template>
   <div class="z-page">
-    <div class="z-head life-index-head">
-      <div class="logo">
-        <img src="../../static/img/logo-round.png" alt="">
-      </div>
-      <span class="title">{{shop.title}}</span>
-      <div class="icon-tool">
-        <router-link :to="{name: 'index'}">
-          <icon name="sync" class="refresh-icon"></icon>
-        </router-link>
-        <share-popup :shareCls="'zui-icon-SHARE2'" :share="shop.shareInfo">
-        </share-popup>
-      </div>
-    </div>
+    <the-header/>
     <view-box class="z-content">
       <!-- swiper 导航栏目 -->
       <div class="life-index-banner">
@@ -20,16 +8,14 @@
         </swiper>
       </div>
       <!-- 3 * 1 显示 -->
-      <wrap-link>
-
-      </wrap-link>
-      <!-- 品牌 -->
-      <cat-box :cats="brandList" :title="'单车品牌'">
-      </cat-box>
+      <wrap-link/>
       <sale-floor v-if="false" :type="'floorA'" :hasAll="true" :floorTitle="'精选好物'" :floorData="floor1">
       </sale-floor>
       <product-wrap title="热门商品" :products="products">
       </product-wrap>
+      <!-- 品牌 -->
+      <cat-box :cats="brandList" :title="'单车品牌'">
+      </cat-box>
       <ending-tip :showLoading="false"></ending-tip>
     </view-box>
 
@@ -45,10 +31,10 @@ import EndingTip from 'components/EndingTip.vue'
 import ProductWrap from 'components/ProductWrap.vue'
 import ProductItem from 'components/ProductItem.vue'
 import ScrollerBox from 'components/ScrollerBox.vue'
+import TheHeader from 'components/TheHeader.vue'
 import GoodGrid from 'components/GoodGrid.vue'
 import WrapLink from 'components/WrapLink.vue'
 import { Swiper, SwiperItem, Popup, ViewBox } from 'vux'
-import BScroll from 'better-scroll'
 
 export default {
   components: {
@@ -64,14 +50,12 @@ export default {
     SharePopup,
     ViewBox,
     ProductWrap,
-    WrapLink
+    WrapLink,
+    TheHeader
   },
   data () {
     return {
-      shop: {
-        logo: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525357369&di=2717825c23b0fa14fccd3cafeb20a099&imgtype=jpg&er=1&src=http%3A%2F%2Fimg5q.duitang.com%2Fuploads%2Fitem%2F201502%2F19%2F20150219180534_MZkMk.jpeg',
-        title: 'AA电单车'
-      },
+
       shopBanner: shopBanner,
       shopCat: shopCat,
       floor1: floor1,
@@ -86,9 +70,6 @@ export default {
     this.getBrand()
   },
   mounted () {
-    this.$nextTick(() => {
-      // this.scroll = new BScroll(this.$refs.wrapper, {})
-    })
     this.index()
   },
 

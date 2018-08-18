@@ -28,6 +28,11 @@ export default new Router({
       component: index
     },
     {
+      path: '/sign',
+      name: 'index',
+      component: () => import('@/views/UserSign.vue')
+    },
+    {
       path: '/user',
       name: 'mine',
       component: mine,
