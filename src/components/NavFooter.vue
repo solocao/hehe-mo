@@ -1,12 +1,14 @@
 <template>
-  <tabbar>
-    <tabbar-item v-for="item in bottomBar" :link="item.link" :key="item.name">
-      <icon slot="icon" class="b-icon" :name="item.icon"></icon>
-      <span slot="label">
-        {{item.name}}
-      </span>
-    </tabbar-item>
-  </tabbar>
+  <div class="z-foot">
+    <tabbar>
+      <tabbar-item v-for="item in bottomBar" :link="item.link" :key="item.name">
+        <icon slot="icon" class="b-icon" :name="item.icon"></icon>
+        <span slot="label">
+          {{item.name}}
+        </span>
+      </tabbar-item>
+    </tabbar>
+  </div>
 </template>
 <script>
 import { Tabbar, TabbarItem } from 'vux'

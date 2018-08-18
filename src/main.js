@@ -7,7 +7,7 @@ import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 import { get, post } from './api/index.js'
 import store from './store'
-import { Flexbox, FlexboxItem } from 'vux'
+import { Flexbox, FlexboxItem, XHeader } from 'vux'
 import './style/app.styl'
 import 'vux/src/styles/1px.less'
 Vue.component('icon', Icon)
@@ -15,6 +15,7 @@ Vue.component('icon', Icon)
 // 全局注册vux组件
 Vue.component('flexbox', Flexbox)
 Vue.component('flexbox-item', FlexboxItem)
+Vue.component('x-header', XHeader)
 
 Vue.config.productionTip = false
 

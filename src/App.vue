@@ -4,24 +4,15 @@
       <keep-alive>
         <router-view/>
       </keep-alive>
-      <div class="z-foot">
-        <buttom-nav></buttom-nav>
-      </div>
     </div>
-
   </div>
-
 </template>
 
 <script>
-import ButtomNav from './components/BottomNav.vue'
 require('assets/css/common.less')
 
 export default {
-  name: 'App',
-  components: {
-    ButtomNav
-  }
+  name: 'App'
 }
 </script>
 
