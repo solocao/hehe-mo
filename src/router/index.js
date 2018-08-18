@@ -33,6 +33,11 @@ export default new Router({
       component: () => import('@/views/UserSign.vue')
     },
     {
+      path: '/category',
+      name: 'index',
+      component: () => import('@/views/CategoryBike.vue')
+    },
+    {
       path: '/user',
       name: 'mine',
       component: mine,

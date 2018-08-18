@@ -9,6 +9,7 @@ import { get, post } from './api/index.js'
 import store from './store'
 import { Flexbox, FlexboxItem } from 'vux'
 import './style/app.styl'
+import 'vux/src/styles/1px.less'
 Vue.component('icon', Icon)
 
 // 全局注册vux组件

@@ -56,29 +56,26 @@ export default {
     linktoDetail (id) {
       this.$router.push({ path: '/page/detail', query: { id: id } })
     },
-    getCategory () {
-      this.$http
-        .get(
-          'https://www.easy-mock.com/mock/5a4896ba62de717d44f2406e/api/v1/category/all'
-        )
-        .then(res => {
-          this.menu = res.data.data.category
-          this.getProduct(this.menu[0].id)
-        })
+    async getCategory () {
+      const params = {
+        url: 'https://www.easy-mock.com/mock/5a4896ba62de717d44f2406e/api/v1/category/all',
+        payload: {
+        }
+      }
+      const result = await this.get(params)
+
+      this.menu = result.data.category
+      this.getProduct(this.menu[0].id)
     },
-    getProduct (id) {
-      this.$http
-        .get(
-          'https://www.easy-mock.com/mock/5a4896ba62de717d44f2406e/api/v1/product/by_category',
-          {
-            params: {
-              id: id
-            }
-          }
-        )
-        .then(res => {
-          this.list = res.data.data.list
-        })
+    async getProduct (id) {
+      const params = {
+        url: 'https://www.easy-mock.com/mock/5a4896ba62de717d44f2406e/api/v1/product/by_category',
+        payload: {
+          id: id
+        }
+      }
+      const result = await this.get(params)
+      this.list = result.data.list
     }
   }
 }
@@ -102,8 +99,8 @@ export default {
       justify-content: center;
       border-left: 3px solid #fff;
       &.active {
-        color: #ab956d;
-        border-color: #ab956d;
+        color: #0fc37c;
+        border-color: #0fc37c;
         font-size: 15px;
         // transform: scale(1.125);
         transition: all linear 0.3s;
@@ -135,7 +132,7 @@ export default {
           justify-content: center;
           .text {
             font-size: 12px;
-            color: #ab956d;
+            color: #0fc37c;
             font-weight: normal;
             &::before,
             &::after {
