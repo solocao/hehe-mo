@@ -1,6 +1,5 @@
 <template>
   <div class="z-page">
-    <the-header/>
     <view-box class="z-content">
       <!-- swiper 导航栏目 -->
       <div class="life-index-banner">
@@ -31,7 +30,6 @@ import EndingTip from 'components/EndingTip.vue'
 import ProductWrap from 'components/ProductWrap.vue'
 import ProductItem from 'components/ProductItem.vue'
 import ScrollerBox from 'components/ScrollerBox.vue'
-import TheHeader from 'components/TheHeader.vue'
 import GoodGrid from 'components/GoodGrid.vue'
 import WrapLink from 'components/WrapLink.vue'
 import { Swiper, SwiperItem, Popup, ViewBox } from 'vux'
@@ -50,10 +48,9 @@ export default {
     SharePopup,
     ViewBox,
     ProductWrap,
-    WrapLink,
-    TheHeader
+    WrapLink
   },
-  data () {
+  data() {
     return {
 
       shopBanner: shopBanner,
@@ -64,18 +61,18 @@ export default {
       brandList: []
     }
   },
-  created () {
+  created() {
     this.advCarousel()
     this.productList()
     this.getBrand()
   },
-  mounted () {
+  mounted() {
     this.index()
   },
 
   methods: {
     // 获取头部的bander
-    async advCarousel () {
+    async advCarousel() {
       this.shopBanner = [{
         url: 'javascript:',
         img: 'https://www.aimatech.com/r/front/images/index/201805292.jpg',
@@ -87,7 +84,7 @@ export default {
         fallbackImg: 'https://www.aimatech.com/r/front/images/index/201805294.jpg'
       }]
     },
-    async productList () {
+    async productList() {
       const parms = {
         page: 1,
         rows: 8
@@ -99,14 +96,14 @@ export default {
       }
     },
     // 获取品牌
-    async  getBrand () {
+    async  getBrand() {
       const result = await this.get('api/brand/list')
       if (result.success) {
         result.data.list.unshift({ id: 0, name: '全部' })
         this.brandList = result.data.list
       }
     },
-    async index () {
+    async index() {
       const params = {
         url: 'bike/index',
         payload: {

@@ -20,7 +20,18 @@ export default new Router({
   routes: [
     {
       path: '/home',
-      component: () => import('@/views/TheHome.vue')
+      component: () => import('@/views/TheHome.vue'),
+      children: [
+        {
+          path: 'index',
+          name: 'index',
+          meta: {
+            title: 'AA电单车'
+          },
+          component: index
+        }
+      ]
+
     },
     {
       path: '/',

@@ -1,30 +1,11 @@
 <template>
-  <view-box ref="viewBox" body-padding-top="46px" :body-padding-bottom="isPaddingBottom">
-    <nav-header></nav-header>
-    <keep-alive>
-      <router-view class="router-view" />
-    </keep-alive>
-    <nav-footer></nav-footer>
-  </view-box>
+  <x-header slot="header" :left-options="leftOptions" :right-options="rightOptions" :title="title" @on-click-more="onClickMore" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
+    AA电单车
+  </x-header>
 </template>
-
 <script>
-import {
-  Tabbar,
-  TabbarItem,
-  ViewBox,
-  XHeader,
-  Actionsheet,
-  TransferDom
-} from 'vux'
-import NavFooter from '../components/NavFooter.vue'
-import NavHeader from '../components/NavHeader.vue'
 import { mapState } from 'vuex'
 export default {
-  name: 'page',
-  directives: {
-    TransferDom
-  },
   data () {
     return {
       showMenu: false,
@@ -35,7 +16,6 @@ export default {
       }
     }
   },
-  created () { },
   computed: {
     ...mapState(['title']),
     leftOptions () {
@@ -61,21 +41,25 @@ export default {
       return '53px'
     }
   },
-  components: {
-    Tabbar,
-    TabbarItem,
-    ViewBox,
-    XHeader,
-    Actionsheet,
-    TransferDom,
-    NavFooter,
-    NavHeader
+  methods: {
+    onClickMore () {
+      this.showMenu = true
+    },
+    onSelectMenu (key, item) {
+      if (key === 'menu1') {
+        this.$router.push({ path: '/page/about' })
+      } else if (key === 'menu2') {
+        window.location.href =
+          'https://huahua0406.github.io/pretty-vendor/'
+      } else if (key === 'menu3') {
+        this.$router.push({ path: '/login' })
+      }
+    }
+  },
+  mounted () {
+
   }
 }
 </script>
-
-<style scoped lang="less">
-.page-view {
-  height: 100%;
-}
+<style lang="stylus">
 </style>
