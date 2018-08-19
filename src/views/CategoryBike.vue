@@ -19,13 +19,10 @@
           <div class="category-goods-items" v-for="(item,index) in products" @click="linktoDetail(item.id)" :key="index">
             <div class="goods-image">
               <img :src="item.img_list[0].url" alt="">
-
             </div>
-
             <div class="goods-name">{{item.name}}</div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
