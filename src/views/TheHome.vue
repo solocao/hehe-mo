@@ -25,7 +25,7 @@ export default {
   directives: {
     TransferDom
   },
-  data() {
+  data () {
     return {
       showMenu: false,
       menus: {
@@ -35,30 +35,30 @@ export default {
       }
     }
   },
-  created() { },
+  created () { },
   computed: {
     ...mapState(['title']),
-    leftOptions() {
+    leftOptions () {
       return {
         showBack: this.$route.path !== '/page/home'
       }
     },
-    rightOptions() {
+    rightOptions () {
       return {
         showMore: true
       }
     },
-    isShowTabbar() {
+    isShowTabbar () {
       if (/detail|theme|order|address|about/.test(this.$route.path)) {
         return true
       }
       return false
     },
-    isPaddingBottom() {
+    isPaddingBottom () {
       if (/detail|theme|order|address|about/.test(this.$route.path)) {
         return '0'
       }
-      return '53px'
+      return '50px'
     }
   },
   components: {

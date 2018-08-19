@@ -1,5 +1,5 @@
 <template>
-  <div class="card-entry">
+  <div class="card-entry" @touchstart="go(data.path)">
     <div class="a-title">
       {{data.title}}
     </div>
@@ -16,6 +16,13 @@ export default {
   props: {
     data: {
       type: Object
+    }
+  },
+  methods: {
+    go (path) {
+      this.$router.push({
+        path: path
+      })
     }
   }
 }

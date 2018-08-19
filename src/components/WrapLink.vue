@@ -20,7 +20,7 @@ export default {
           title: '电动车',
           sub: '购买有福利',
           img: 'https://ss2.bdstatic.com/8_V1bjqh_Q23odCf/pacific/1586009247.jpg',
-          path: 'home/category'
+          path: '/home/category'
         },
         {
           title: '精彩活动',
