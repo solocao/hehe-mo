@@ -29,6 +29,11 @@ export default new Router({
             title: 'AA电单车'
           },
           component: index
+        },
+        {
+          path: 'category',
+          name: 'index',
+          component: () => import('@/views/CategoryBike.vue')
         }
       ]
 

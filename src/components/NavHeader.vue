@@ -1,5 +1,5 @@
 <template>
-  <x-header slot="header" :left-options="leftOptions" :right-options="rightOptions" :title="title" @on-click-more="onClickMore" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
+  <x-header :left-options="leftOptions" :right-options="rightOptions" :title="title" @on-click-more="onClickMore" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
     AA电单车
   </x-header>
 </template>

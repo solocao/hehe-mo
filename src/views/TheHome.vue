@@ -1,6 +1,6 @@
 <template>
   <view-box ref="viewBox" body-padding-top="46px" :body-padding-bottom="isPaddingBottom">
-    <nav-header></nav-header>
+    <nav-header slot="header"></nav-header>
     <keep-alive>
       <router-view class="router-view" />
     </keep-alive>
@@ -25,7 +25,7 @@ export default {
   directives: {
     TransferDom
   },
-  data () {
+  data() {
     return {
       showMenu: false,
       menus: {
@@ -35,26 +35,26 @@ export default {
       }
     }
   },
-  created () { },
+  created() { },
   computed: {
     ...mapState(['title']),
-    leftOptions () {
+    leftOptions() {
       return {
         showBack: this.$route.path !== '/page/home'
       }
     },
-    rightOptions () {
+    rightOptions() {
       return {
         showMore: true
       }
     },
-    isShowTabbar () {
+    isShowTabbar() {
       if (/detail|theme|order|address|about/.test(this.$route.path)) {
         return true
       }
       return false
     },
-    isPaddingBottom () {
+    isPaddingBottom() {
       if (/detail|theme|order|address|about/.test(this.$route.path)) {
         return '0'
       }
