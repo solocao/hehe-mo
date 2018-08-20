@@ -16,7 +16,7 @@ import store from '../store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/home',
@@ -114,3 +114,45 @@ export default new Router({
     }
   ]
 })
+router.beforeEach(async (to, from, next) => {
+  console.log(to.path)
+  if (to.path === '/home/user') {
+    console.log(store)
+  }
+  // // 无需进行验证的路由
+  // if (contains(['/index', '/register', '/forget', '/legal_agreement', '/oauth/grant'], to.path)) {
+  //   return next();
+  // }
+  // // 需要进行登录状态检测的路由
+  // if (!store.getters['global/login'] && to.path !== '/login') {
+  //   next({
+  //     path: '/login'
+  //   });
+  // }
+  // if (contains(['/routine/live_2d', '/routine/live_3d', '/nofly/report_2d', '/nofly/report_3d', '/flight/apply_2d', '/flight/apply_3d'], to.path)) {
+  //   store.dispatch('global/set', { key: 'setting', data: true });
+  // } else {
+  //   store.dispatch('global/set', { key: 'setting', data: false });
+  // }
+  // if (to.path !== '/login') {
+  //   // 判断是否登录
+  //   const token = get('token');
+  //   const form = get('form');
+  //   // 权限为false,则不进行跳转
+  //   if (checkUserRole(to.path) === false) {
+  //     return;
+  //   }
+  //   if (token === null || token.expires < parseInt(new Date() / 1000, 10)) {
+  //     return next({
+  //       path: '/login',
+  //       query: {
+  //         redirect: to.fullPath === '/logout' ? '/' : to.fullPath
+  //       }
+  //     });
+  //   }
+  // }
+  // store.dispatch('global/set', { key: 'breadcrumb', data: `${to.name}` });
+  return next()
+})
+
+export default router
