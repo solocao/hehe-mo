@@ -34,6 +34,11 @@ const router = new Router({
           path: 'category',
           name: 'index',
           component: () => import('@/views/CategoryBike.vue')
+        },
+        {
+          path: 'user',
+          name: 'user',
+          component: () => import('@/views/UserCenter.vue')
         }
       ]
 
