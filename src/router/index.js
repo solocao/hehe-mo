@@ -117,7 +117,9 @@ const router = new Router({
 router.beforeEach(async (to, from, next) => {
   console.log(to.path)
   if (to.path === '/home/user') {
-    console.log(store)
+    if (store.state.login !== true) {
+      return next('/login')
+    }
   }
   // // 无需进行验证的路由
   // if (contains(['/index', '/register', '/forget', '/legal_agreement', '/oauth/grant'], to.path)) {

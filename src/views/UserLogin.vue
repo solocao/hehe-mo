@@ -7,6 +7,7 @@
           AA电单车
         </span>
       </div>
+
       <group title="mask">
         <x-input v-model="username" title="用户名" name="username" placeholder="用户名" is-type="china-name">
           <span slot="label" class="slot-label-icon">
@@ -31,12 +32,16 @@
       <span @click="goHome">返回首页</span>
     </div>
     <toast v-model="toastShow" type="text" position="middle" width="20em">{{toastText}}</toast>
+    <div v-transfer-dom>
+      <loading :show="loadShow" :text="text1"></loading>
+    </div>
   </div>
 </template>
 <script>
 import { XInput, XButton, Toast } from 'vux'
 import { db } from 'lib/db'
 import { mapState, mapMutations } from 'vuex'
+import { md5 } from '../lib/utils'
 export default {
   components: {
     XInput,
@@ -45,6 +50,8 @@ export default {
   },
   data() {
     return {
+      text1: '注册登录中',
+      loadShow: false,
       username: '',
       password: '',
       kaptcha: '',
@@ -68,27 +75,40 @@ export default {
       })
     },
     async login() {
-      const parms = {
-        username: this.username,
-        password: this.password,
-        kaptcha: this.kaptcha
+      const params = {
+        url: '/user/login',
+        payload: {
+          name: this.username,
+          password: md5(this.password)
+        }
       }
-      const result = await this.post('/api/user/login', parms)
-      if (result.success) {
-        db.set('login', true).write()
-        db.set('user', result.data).write()
-        this.set({ login: true, user: result.data })
-        console.log('user')
-        console.log(db.get('user').value())
-        return this.$router.push('/index')
+      const result = await this.post(params)
+      if (result.code === 1) {
+        alert('登录成功')
       } else {
-        this.toastText = result.errorMsg
-        this.toastShow = true
+        this.loadShow = true
+        this.register()
       }
     },
-    // 刷新验证码
-    refreshKaptcha() {
-      this.kaptchaUrl = this.kaptchaUrl + '?'
+    // 注册
+    async register() {
+      const params = {
+        url: '/user/register',
+        payload: {
+          name: this.username,
+          password: md5(this.password)
+        }
+      }
+      // 用户名注册
+      const result = await this.post(params)
+      if (result.code === 1) {
+        this.loadShow = false
+        this.set({ login: true, user: result.data })
+        this.$router.push({
+          path: '/home/user'
+        })
+      }
+      console.log(result)
     }
 
   },
