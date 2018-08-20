@@ -39,6 +39,11 @@ const router = new Router({
           path: 'user',
           name: 'user',
           component: () => import('@/views/UserCenter.vue')
+        },
+        {
+          path: 'address',
+          name: 'address',
+          component: () => import('@/views/UserAddress.vue')
         }
       ]
 

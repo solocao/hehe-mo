@@ -36,7 +36,7 @@
     </card>
 
     <group class="setting" :title="'设置'">
-      <cell is-link link="/location">
+      <cell is-link link="/home/address">
         <div slot="title">
           <span>收货地址</span>
         </div>
