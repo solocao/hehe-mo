@@ -49,6 +49,11 @@ const router = new Router({
           path: 'address/add',
           name: 'addressAdd',
           component: () => import('@/views/UserAddressAdd.vue')
+        },
+        {
+          path: 'shop/cart',
+          name: 'shop_cart',
+          component: () => import('@/views/ShopCart.vue')
         }
       ]
 

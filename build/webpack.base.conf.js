@@ -20,6 +20,7 @@ const createLintingRule = () => ({
   }
 })
 
+console.log(config.dev.assetsPublicPath)
 const webpackConfig = {
   context: path.resolve(__dirname, '../'),
   entry: {
