@@ -64,6 +64,11 @@ const router = new Router({
           path: 'active',
           name: '活动',
           component: () => import('@/views/ActiveList.vue')
+        },
+        {
+          path: 'credit',
+          name: '信用卡申请',
+          component: () => import('@/views/CreditList.vue')
         }
       ]
 

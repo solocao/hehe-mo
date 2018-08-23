@@ -31,6 +31,8 @@
           立即领取
         </span>
       </div>
+      <div class="a-stamp"></div>
+      <div class="a-stamp"></div>
     </div>
   </div>
 </template>
@@ -94,6 +96,7 @@ export default {
   .a-c3 {
     width: 100px;
     height: 90px;
+    position: relative;
 
     .detail {
       height: 50%;
@@ -125,6 +128,18 @@ export default {
         padding: 2px 10px;
         border-radius: 13px;
       }
+    }
+
+    .a-stamp {
+      position: absolute;
+      width: 6px;
+      height: 100px;
+      background: red;
+      top: -5px;
+      left: -10px;
+      background: radial-gradient(transparent 0px, transparent 4px, #46B211 4px, #46B211);
+      background-size: 12px 12px;
+      background-position: 6px -10px;
     }
   }
 }
