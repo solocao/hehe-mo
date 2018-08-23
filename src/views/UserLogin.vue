@@ -28,6 +28,10 @@
     <div class="a-info">
       新用户自动注册登录。
     </div>
+    <div class="a-wechat">
+      <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534934543830&di=8ec2e34c313375064b3da71e5f653219&imgtype=0&src=http%3A%2F%2Fwww.sj520.cn%2Fsc%2Fima%2Fweixin_sj520_25.jpg" alt="" @click="wxRedirect">
+      <span>微信登录</span>
+    </div>
     <div class="a-back">
       <span @click="goHome">返回首页</span>
     </div>
@@ -48,7 +52,7 @@ export default {
     XButton,
     Toast
   },
-  data() {
+  data () {
     return {
       text1: '注册登录中',
       loadShow: false,
@@ -69,12 +73,12 @@ export default {
     ...mapMutations({
       set: 'set'
     }),
-    goHome() {
+    goHome () {
       this.$router.push({
         path: '/home/index'
       })
     },
-    async login() {
+    async login () {
       const params = {
         url: '/user/login',
         payload: {
@@ -91,7 +95,7 @@ export default {
       }
     },
     // 注册
-    async register() {
+    async register () {
       const params = {
         url: '/user/register',
         payload: {
@@ -109,10 +113,23 @@ export default {
         })
       }
       console.log(result)
+    },
+    async wxRedirect () {
+      const params = {
+        url: 'wechat/oauth/redirect',
+        payload: {}
+      }
+      const result = await this.get(params)
+      console.log(result)
+      if (result.code === 1) {
+        const url = result.data
+        self.location = url
+        // console.log(url)
+      }
     }
 
   },
-  mounted() {
+  mounted () {
     this.set({ haha: 'ceshi', niubi: 1231 })
   }
 }
@@ -126,8 +143,8 @@ export default {
     align-items: center;
     .a-logo {
       margin-top: 30px;
-      width: 25%;
-      height: 25%;
+      width: 128px;
+      height: 128px;
     }
     .a-title {
       margin-top: 20px;
@@ -152,6 +169,25 @@ export default {
     color: #1aad19;
     font-weight: bold;
     width: 100%;
+  }
+
+  .a-wechat {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    img {
+      width: 100px;
+      height: 100px;
+    }
+    span {
+      position: absolute;
+      bottom: 0px;
+      font-size: 12px;
+      font-weight: bold;
+      color: white;
+    }
   }
 }
 .address-edit-wrap {

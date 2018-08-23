@@ -54,6 +54,16 @@ const router = new Router({
           path: 'shop/cart',
           name: 'shop_cart',
           component: () => import('@/views/ShopCart.vue')
+        },
+        {
+          path: 'coupon',
+          name: '优惠券',
+          component: () => import('@/views/Coupon.vue')
+        },
+        {
+          path: 'active',
+          name: '活动',
+          component: () => import('@/views/ActiveList.vue')
         }
       ]
 
@@ -62,6 +72,7 @@ const router = new Router({
       path: '/',
       redirect: '/index'
     },
+
     {
       path: '/index',
       name: 'index',
@@ -71,6 +82,11 @@ const router = new Router({
       path: '/sign',
       name: 'index',
       component: () => import('@/views/UserSign.vue')
+    },
+    {
+      path: '/weixin',
+      name: 'weixin',
+      component: () => import('@/views/UserWeixin.vue')
     },
     {
       path: '/category',
@@ -109,12 +125,6 @@ const router = new Router({
       path: '/articles',
       name: 'articleList',
       component: ArticleList
-    },
-    // 优惠券
-    {
-      path: '/coupon',
-      name: 'coupon',
-      component: Coupon
     },
     {
       path: '/cart',

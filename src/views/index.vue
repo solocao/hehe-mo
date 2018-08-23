@@ -66,10 +66,9 @@ export default {
     this.productList()
     this.getBrand()
   },
-  beforeMount () {
-    this.getSignature()
-  },
+
   mounted () {
+    this.wxConfig()
     this.index()
   },
 
@@ -120,20 +119,20 @@ export default {
       console.log('看看bike')
       console.log(result)
     },
-    // 获取微信signature
-    async  getSignature () {
+    // 微信配置
+    async  wxConfig () {
       const wx = window.wx
       let url = window.location.href
       url = url.substr(0, url.indexOf(location.hash))
-      alert(url)
       const params = {
-        url: '/wechat/config',
+        url: '/wechat/js/config',
         payload: {
           url: url
         }
       }
       const result = await this.get(params)
       if (result.code === 1) {
+        console.log('看看微信的数据')
         console.log(result.data)
         const { appId, timestamp, noncestr, signature } = result.data
         wx.config({
@@ -146,7 +145,6 @@ export default {
           jsApiList: ['onMenuShareTimeline', 'chooseImage', 'previewImage', 'uploadImage', 'downloadImage', 'hideAllNonBaseMenuItem', 'showAllNonBaseMenuItem']
         })
         wx.ready(() => {
-          wx.showAllNonBaseMenuItem()
           console.log('success')
         })
       }
