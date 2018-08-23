@@ -31,7 +31,7 @@ export default {
         {
           name: '精彩',
           iconCls: 'zui-icon-TEA',
-          link: 'articles',
+          link: 'active',
           icon: 'calendar'
         },
         {
