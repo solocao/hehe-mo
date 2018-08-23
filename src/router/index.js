@@ -58,7 +58,7 @@ const router = new Router({
         {
           path: 'coupon',
           name: '优惠券',
-          component: () => import('@/views/Coupon.vue')
+          component: () => import('@/views/CouponList.vue')
         },
         {
           path: 'active',
