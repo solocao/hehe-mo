@@ -32,7 +32,7 @@ export default {
   width: 100%;
   height: 140px;
   background: white;
-  box-shadow: 0 0px 3px #9E9E9E;
+  box-shadow: 0 1px 6px #9e9e9e8a;
   position: relative;
 
   .a-title {

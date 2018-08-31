@@ -33,7 +33,6 @@ export default {
   padding-bottom: 14px;
   background-color: #fff;
   text-align: center;
-  border-top: 8px solid #efeff4;
 }
 .article-good-recommend-wrap {
   margin-left: 8px;
