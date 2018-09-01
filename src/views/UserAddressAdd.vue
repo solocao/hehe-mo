@@ -52,7 +52,7 @@ export default {
   components: {
     ViewBox, XHeader, Box, XButton, Group, Cell, XInput, TransferDom, Actionsheet, XAddress, XTextarea, Toast
   },
-  data() {
+  data () {
     return {
       gTitle: '添加地址',
       addressId: 0,
@@ -68,15 +68,16 @@ export default {
   },
   computed: {
     ...mapState([
-      'menus'
+      'menus',
+      'user'
     ]),
     ...mapGetters([
       'common_detail_address'
     ])
   },
-  created() {
+  created () {
   },
-  mounted() {
+  mounted () {
     if (this.$route.query.act !== 'undefined') {
       if (this.$route.query.act === 'add') {
         this.gTitle = '添加地址'
@@ -93,54 +94,33 @@ export default {
   },
   methods: {
     ...mapMutations(['MenusClose']),
-    onSave() {
+    async onSave () {
       if (this.gTitle === '添加地址') {
-        console.log('添加地址')
-        this.$store.dispatch('setAddress', {
-          contacts: this.address.name,
-          phone: this.address.phone,
-          addrName: Value2nameFilter(this.address.addrName, ChinaAddressData).split(' ').join('/'), // ? 编号对应城市
-          addrDetail: this.address.addrDetail
-        }).then(res => {
-          if (res.code === 200) {
-            this.$vux.toast.show({
-              text: res.data
-            })
-            setTimeout(() => {
-              this.$vux.toast.hide()
-              this.go('location')
-            }, 500)
-          }
-        })
+        console.log(this.address)
+        const { name, phone, addrDetail } = this.address
+        const params = {
+          url: '/address/add',
+          payload: {
+            name: name,
+            mobile: phone,
+            address: addrDetail
+          },
+          auth: true
+        }
+        const result = await this.post(params)
+        console.log(result)
+        if (result.code === 1) {
+          this.$router.push({
+            path: '/home/address'
+          })
+        }
       }
 
       if (this.gTitle === '修改地址') {
-        console.log('修改地址')
-        let addrName = Value2nameFilter(this.common_detail_address.addrName, ChinaAddressData)// ? 编号对应城市
-        this.$store.dispatch('updateAddress', {
-          id: this.addressId,
-          contacts: this.common_detail_address.name,
-          phone: this.common_detail_address.phone,
-          addrName: addrName.split(' ').join('/'),
-          addrDetail: this.common_detail_address.addrDetail
-        }).then(res => {
-          if (res.code === 200) {
-            this.$vux.toast.show({
-              text: res.data
-            })
-            setTimeout(() => {
-              this.$vux.toast.hide()
-              this.go('location')
-            }, 500)
-            this.$router.replace({
-              name: 'location',
-              query: { flag: 'modify' }
-            })
-          }
-        })
+        alert('修改地址')
       }
     },
-    deleteAddress() {
+    deleteAddress () {
       this.$store.dispatch('deleteAddress', this.addressId).then(res => {
         if (res.code === 200) {
           this.$vux.toast.show({
@@ -153,7 +133,7 @@ export default {
         }
       })
     },
-    onMenusClose(key, value) {
+    onMenusClose (key, value) {
       /* this.$vux.loading.show({
        text: '跳转中...'
        }); */

@@ -7,7 +7,7 @@ import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 import { get, post } from './api/index.js'
 import store from './store'
-import { Flexbox, FlexboxItem, XHeader, Loading, XButton } from 'vux'
+import { Flexbox, FlexboxItem, XHeader, Loading, XButton, XDialog } from 'vux'
 import './style/app.styl'
 import 'vux/src/styles/1px.less'
 Vue.component('icon', Icon)
@@ -18,6 +18,7 @@ Vue.component('flexbox-item', FlexboxItem)
 Vue.component('x-header', XHeader)
 Vue.component('loading', Loading)
 Vue.component('x-button', XButton)
+Vue.component('x-dialog', XDialog)
 
 Vue.config.productionTip = false
 

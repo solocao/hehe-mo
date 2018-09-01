@@ -21,7 +21,7 @@ export const get = (params) => {
   if (auth) {
     config = Object.assign({}, config, {
       headers: {
-        authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjM4OGRkMjgxYTFhNTVjMDU4OGM3OGYiLCJleHAiOjE1MzMwMjgwODAsImlhdCI6MTUzMDQzNjA4MH0.1NYtGIOHpJGV0Ix36ad9gqxPIYB745zA_YX03a1wJDY' || store.state.user.auth
+        authorization: store.state.user.auth
       }
     })
   }
@@ -35,7 +35,7 @@ export const post = (params) => {
   if (auth) {
     authHeader = {
       headers: {
-        authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjM4OGRkMjgxYTFhNTVjMDU4OGM3OGYiLCJleHAiOjE1MzMwMjgwODAsImlhdCI6MTUzMDQzNjA4MH0.1NYtGIOHpJGV0Ix36ad9gqxPIYB745zA_YX03a1wJDY' || store.state.user.user.auth
+        authorization: store.state.user.auth
       }
     }
   }
