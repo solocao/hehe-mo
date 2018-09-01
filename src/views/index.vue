@@ -16,7 +16,7 @@
       <product-wrap title="热门商品" :products="products">
       </product-wrap>
       <!-- 品牌 -->
-      <cat-box :cats="brandList" :title="'单车品牌'">
+      <!-- <cat-box :cats="brandList" :title="'单车品牌'"> -->
       </cat-box>
       <ending-tip :showLoading="false"></ending-tip>
     </view-box>
@@ -85,7 +85,7 @@ export default {
       this.shopBanner = [{
         url: 'javascript:',
         img: 'https://www.aimatech.com/r/front/images/index/201805292.jpg',
-        title: '送你一朵fua'
+        title: '送你一辆车'
       }, {
         url: 'javascript:',
         img: 'https://www.aimatech.com/r/front/images/index/201805294.jpg',

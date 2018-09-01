@@ -1,36 +1,45 @@
 <template>
   <div class="location">
-
-    <group v-for="(item,index) in common_address" :key="index" v-if="item.phone">
-      <x-switch :title="item.name+'  '+item.phone" prevent-default v-model="item.isUsed" @on-click="changeSwitch(item)"></x-switch>
-      <cell :title="item.addrName" :inline-desc="item.addrDetail" :link="{path:'/locationForm',query:{id:item.id}}"></cell>
+    <group v-for="(item,index) in common_address" :key="index" v-if="item.mobile">
+      <x-switch :title="item.name+'  '+item.mobile" prevent-default v-model="item.isUsed" @on-click="changeSwitch(item)"></x-switch>
+      <cell :title="item.addrName" :inline-desc="item.address" :link="{path:'/locationForm',query:{id:item.id}}"></cell>
     </group>
-
   </div>
 </template>
 
 <script>
 import { ViewBox, XHeader, XSwitch, TransferDom, Actionsheet, Group, GroupTitle, Cell, Toast } from 'vux'
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'location',
   components: {
     ViewBox, XHeader, XSwitch, TransferDom, Actionsheet, Group, GroupTitle, Cell, Toast
   },
-  data () {
+  data() {
     return {
-      common_address: [{ name: '曹天觉', phone: '1776818595', addrName: 'asdfasfasf', addrDetail: 'asfasf' },
-        { name: '曹天觉', phone: '1776818595', addrName: 'asdfasfasf', addrDetail: 'asfasf' }]
+
     }
   },
-  created () {
+  computed: {
+    ...mapState(['user']),
+    common_address() {
+      if (this.user !== undefined) {
+        return this.user.addresses
+      }
+      console.log(this.user)
+      return [{ name: '曹天觉', mobile: '1776818595', addrName: 'asdfasfasf', addrDetail: 'asfasf' },
+      { name: '曹天觉', mobile: '1776818595', addrName: 'asdfasfasf', addrDetail: 'asfasf' }]
+    }
+
+  },
+  created() {
     this.$store.dispatch('getAddress')
   },
-  mounted () {
+  mounted() {
   },
   methods: {
-    changeSwitch (item, newVal, oldVal) {
+    changeSwitch(item, newVal, oldVal) {
       if (item.id !== 'undefined' && item.id.length === 32) {
         // 清除所有
         this.common_address.forEach((item, index) => {
@@ -64,12 +73,13 @@ export default {
         })
       }
     },
-    createAddress () {
+    createAddress() {
       this.$router.replace({
         name: 'locationForm',
         query: { act: 'add' }
       })
     }
+
   }
 }
 </script>

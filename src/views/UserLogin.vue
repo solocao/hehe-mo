@@ -28,7 +28,7 @@
     <div class="a-info">
       新用户自动注册登录。
     </div>
-    <div class="a-wechat">
+    <div class="a-wechat" v-if="false">
       <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534934543830&di=8ec2e34c313375064b3da71e5f653219&imgtype=0&src=http%3A%2F%2Fwww.sj520.cn%2Fsc%2Fima%2Fweixin_sj520_25.jpg" alt="" @click="wxRedirect">
       <span>微信登录</span>
     </div>
@@ -88,7 +88,8 @@ export default {
       }
       const result = await this.post(params)
       if (result.code === 1) {
-        alert('登录成功')
+        this.set({ login: true, user: result.data })
+        this.$router.push({ path: '/home/user' })
       } else {
         this.loadShow = true
         this.register()
