@@ -9,25 +9,6 @@
     <div>
       <x-button @click.native="doShowToast">新增</x-button>
     </div>
-
-    <div v-transfer-dom>
-      <x-dialog v-model="showToast" class="dialog-demo" hide-on-blur>
-        <group class="vux-group" label-width="4.5em" label-margin-right="2em" label-align="right" v-if="!this.addressId">
-          <x-input title="收货人" v-model="address.name" placeholder="请输入姓名"></x-input>
-          <x-input title="手机号" v-model="address.phone" placeholder="请输入手机号"></x-input>
-
-          <x-address title="省市区" v-model="address.addrName" :list="addressData" raw-value value-text-align="left"></x-address>
-          <x-textarea title="详细地址" v-model="address.addrDetail" :show-counter="false" :rows="3" placeholder="街道/门牌号"></x-textarea>
-        </group>
-        <div style="padding:15px;">
-          <x-button @click.native="doShowToast" type="primary">show toast</x-button>
-        </div>
-        <div @click="showToast=false">
-          <span class="vux-close"></span>
-        </div>
-      </x-dialog>
-      <x-icon type="ios-close-outline" style="fill:#fff;"></x-icon>
-    </div>
   </div>
 </template>
 
