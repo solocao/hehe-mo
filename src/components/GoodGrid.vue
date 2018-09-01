@@ -1,6 +1,7 @@
 <template>
   <ul class="zlist-2-item">
-    <li class="item" v-for="item in data" :key="item.id">
+    <li class="item" v-for="item in data" :key="item._id">
+      {{item}}
       <router-link :to="{
 					name: 'good',
 					params: {id: item.id}
@@ -11,7 +12,7 @@
             {{item.name}}
           </div>
           <div class="subtitle z-ellipsis-2">
-            ￥{{item.salePrice}}
+            ￥{{item.sale_price}}
           </div>
         </div>
       </router-link>

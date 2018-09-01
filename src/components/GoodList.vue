@@ -9,7 +9,7 @@
 				{{data.subInfo}}
 			</div>
 			<div class="price">
-				￥{{data.price}}
+				￥123{{data.price}}
 			</div>
 		</div>
 	</div>

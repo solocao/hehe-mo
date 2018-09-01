@@ -6,31 +6,19 @@
     <div>
       <ul class="zlist-2-item">
         <li class="item" v-for="p in products" :key="p.id">
-          <router-link :to="{
-					name: 'good',
-					params: {id: p.id}
-				}">
-            <div class="img_wrap">
-              <img :src="p.img_list[0].url" />
-            </div>
-
-            <div class="info">
-              <div class="title z-ellipsis-2">
-                {{p.name}}
-              </div>
-              <div class="subtitle z-ellipsis-2">
-                ￥{{p.salePrice}}
-              </div>
-            </div>
-          </router-link>
+          <product-index-item :product="p"></product-index-item>
         </li>
       </ul>
     </div>
   </div>
 </template>
 <script>
+import ProductIndexItem from './ProductIndexItem.vue'
 export default {
-  props: ['title', 'products']
+  props: ['title', 'products'],
+  components: {
+    ProductIndexItem: ProductIndexItem
+  }
 }
 </script>
 <style lang="stylus">
@@ -84,6 +72,7 @@ li {
     float: left;
     width: 50%;
     background: #efeff4;
+    position: relative;
 
     a {
       padding-top: 14px;
@@ -137,5 +126,11 @@ li {
   text-align: center;
   padding-top: 14px;
   font-family: 'heiti';
+}
+
+.good-heart {
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
 </style>
