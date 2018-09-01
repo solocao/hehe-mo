@@ -1,15 +1,15 @@
 <template>
   <!-- 个人中心 -->
   <div class="user">
-    <card :header="{title:'我的订单'}">
+    <card :header="{title:'我的数据'}">
       <div slot="content" class="card-demo-flex card-demo-content01">
         <div class="vux-1px-l vux-1px-r" @click="go('books',{act:'pay'})">
           <x-icon slot="overwrite-left" type="card" size="24" style="fill:#666;"></x-icon>
-          <p>待付款</p>
+          <p>信用卡</p>
         </div>
-        <div class="vux-1px-r" @click="go('books',{act:'wait'})">
-          <x-icon slot="overwrite-left" type="android-plane" size="24" style="fill:#666;"></x-icon>
-          <p>待收货</p>
+        <div class="vux-1px-r" @click="go('/home/love',{act:'wait'})">
+          <x-icon slot="overwrite-left" type="heart" size="24" style="fill:#666;"></x-icon>
+          <p>心愿单</p>
         </div>
         <div @click="go('books',{act:'all'})">
           <x-icon slot="overwrite-left" type="ios-paper-outline" size="24" style="fill:#666;"></x-icon>
@@ -92,6 +92,9 @@ export default {
 
   },
   methods: {
+    go (path) {
+      this.$router.push({ path: path })
+    },
     onLogout () {
       this.$store.commit('LOGOUT')
       this.$router.replace({

@@ -107,7 +107,7 @@ export default {
       orderTag: {
         all: {
           tag: 'all',
-          text: '我的订单',
+          text: '我的数据',
           icon: ''
         },
         pay: {
