@@ -41,7 +41,6 @@ export default {
       if (this.login !== true) {
         this.$router.push({ path: '/login' })
       }
-      return
       const index = this.loves.findIndex(x => x === productID)
       if (index > -1) {
         this.loves.splice(index, 1)

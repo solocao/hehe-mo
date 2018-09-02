@@ -1,14 +1,14 @@
 <template>
   <div class="myCollection">
-    <div v-for="item in collectionList" :key="item.id">
+    <div v-for="item in loveList" :key="item._id">
       <div class="goods-img">
-        <img :src="item.img" />
+        <img :src="item.product_id.img_list[0].url" />
       </div>
       <div class="goods-info">
-        <p>{{item.name}}</p>
+        <p>{{item.product_id.name}}</p>
         <div>
-          <span>￥{{item.price}}</span>
-          <a href="javascript:;">取消收藏</a>
+          <span>￥{{item.product_id.sale_price}}</span>
+          <span>取消喜欢</span>
         </div>
       </div>
     </div>
@@ -18,8 +18,9 @@
 <script>
 export default {
   name: 'myCollection',
-  data() {
+  data () {
     return {
+      loveList: [],
       collectionList: [{
         id: '1',
         name: 'MD100*0.5-DKSKK+125这是一个什么玩意',
@@ -42,6 +43,22 @@ export default {
         img: ''
       }]
     }
+  },
+  methods: {
+    async getLoves () {
+      const params = {
+        url: 'user/loves/list',
+        payload: {},
+        auth: true
+      }
+      const result = await this.get(params)
+      if (result.code === 1) {
+        this.loveList = result.data
+      }
+    }
+  },
+  mounted () {
+    this.getLoves()
   }
 }
 </script>
@@ -80,8 +97,9 @@ export default {
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    > div a {
-      float: right;
+    > div {
+      display: flex;
+      justify-content: space-between;
     }
   }
 }
