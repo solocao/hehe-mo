@@ -11,7 +11,7 @@
           <x-icon slot="overwrite-left" type="android-plane" size="24" style="fill:#666;"></x-icon>
           <p>待收货</p>
         </div>
-        <div @click="go('books',{act:'all'})">
+        <div @click="go('/home/user/order',{act:'all'})">
           <x-icon slot="overwrite-left" type="ios-paper-outline" size="24" style="fill:#666;"></x-icon>
           <p>全部订单</p>
         </div>

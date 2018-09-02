@@ -101,16 +101,16 @@ export default {
     }
   },
   created () {
-    if (this.$route.query.act !== 'undefined') {
-      if (this.$route.query.act === 'books') {
-        this.$router.replace({
-          name: 'cart',
-          query: {}
-        })
-        window.location.reload()
-      }
-    }
-    this.$store.dispatch('cartGoodsList')
+    // if (this.$route.query.act !== 'undefined') {
+    //   if (this.$route.query.act === 'books') {
+    //     this.$router.replace({
+    //       name: 'cart',
+    //       query: {}
+    //     })
+    //     window.location.reload()
+    //   }
+    // }
+    // this.$store.dispatch('cartGoodsList')
   },
   mounted () {
 

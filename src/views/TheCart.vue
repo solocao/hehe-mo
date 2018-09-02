@@ -74,6 +74,9 @@ export default {
     selectNum () {
 
     }
+  },
+  mounted () {
+    alert('哈哈哈')
   }
 }
 </script>

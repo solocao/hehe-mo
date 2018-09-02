@@ -10,7 +10,7 @@
             </router-link>
           </div>
           <div class="like">
-            <x-icon class="good-heart" type="heart" size="34"></x-icon>
+            <x-icon type="heart" size="34"></x-icon>
           </div>
           <div class="addcart" @click="toggerSpeciPopup(1)">
             加入购物车
@@ -158,7 +158,7 @@ export default {
     SharePopup,
     GoodParam
   },
-  data() {
+  data () {
     return {
       product: {
         name: '',
@@ -182,16 +182,16 @@ export default {
     }
   },
   computed: {
-    scrollerHeight() {
+    scrollerHeight () {
       return 'cale(100%-130px)'
     }
   },
-  created() {
+  created () {
     this.productDetail(this.$route.params.id)
   },
   methods: {
     // 获取商品详情
-    async productDetail(id) {
+    async productDetail (id) {
       const params = {
         url: `product/item/${id}`,
         payload: {}
@@ -212,7 +212,7 @@ export default {
       // }
     },
 
-    likeHandler($event) {
+    likeHandler ($event) {
       console.log($event)
       if (this.isLike) {
         this.isLike = false
@@ -222,15 +222,15 @@ export default {
         this.good.likeNum++
       }
     },
-    resetScroller() {
+    resetScroller () {
       this.$nextTick(() => {
         this.$refs.scroller.reset()
       })
     },
-    log(str) {
+    log (str) {
       console.log(str)
     },
-    toggerSpeciPopup(type) {
+    toggerSpeciPopup (type) {
       switch (type) {
         case 0:
           this.btnType = 0
@@ -246,7 +246,7 @@ export default {
           break
       }
     },
-    paramChange(param) {
+    paramChange (param) {
       // data 存引用类型会出现奇怪的事情
       var pos = this.selectParams.indexOf(param.name)
       console.log(pos)
@@ -258,7 +258,7 @@ export default {
 
       console.log(this.selectParams)
     },
-    handleBuy() {
+    handleBuy () {
       console.log(1111)
       this.show = false
     }

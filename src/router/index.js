@@ -5,7 +5,6 @@ import index from 'views/index'
 import mine from 'views/MyCenter'
 import UserLogin from 'views/UserLogin'
 import BetterScroll from '@/components/BetterScroll'
-import GoodDetail from 'views/GoodDetail'
 import ArticleList from 'views/ArticleList'
 import TheCart from 'views/TheCart'
 import GoodCat from 'views/GoodCat'
@@ -46,6 +45,11 @@ const router = new Router({
           component: () => import('@/views/user/TheCenter.vue')
         },
         {
+          path: 'user/order',
+          name: 'user_order',
+          component: () => import('@/views/user/ListOrder.vue')
+        },
+        {
           path: 'address',
           name: 'address',
           component: () => import('@/views/UserAddress.vue')
@@ -84,6 +88,11 @@ const router = new Router({
           path: 'product/:id',
           name: 'product_detail',
           component: () => import('@/views/product/TheDetail.vue')
+        },
+        {
+          path: 'shop/cart',
+          name: 'shop_cart',
+          component: () => import('@/views/TheCart.vue')
         }
       ]
 
@@ -135,11 +144,6 @@ const router = new Router({
       path: '/better',
       name: 'better',
       component: BetterScroll
-    },
-    {
-      path: '/good/:id',
-      name: 'good',
-      component: GoodDetail
     },
     {
       path: '/articles',
