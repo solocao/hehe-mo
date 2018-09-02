@@ -40,6 +40,11 @@ const router = new Router({
           component: () => import('@/views/UserCenter.vue')
         },
         {
+          path: 'user/credit',
+          name: 'user_credit',
+          component: () => import('@/views/credit/CreditList.vue')
+        },
+        {
           path: 'user1',
           name: 'user1',
           component: () => import('@/views/user/TheCenter.vue')
@@ -48,6 +53,11 @@ const router = new Router({
           path: 'user/order',
           name: 'user_order',
           component: () => import('@/views/user/ListOrder.vue')
+        },
+        {
+          path: 'order/detail',
+          name: 'order_detail',
+          component: () => import('@/views/order/OrderDetail.vue')
         },
         {
           path: 'address',
@@ -83,6 +93,11 @@ const router = new Router({
           path: 'credit',
           name: '信用卡申请',
           component: () => import('@/views/CreditList.vue')
+        },
+        {
+          path: 'credit/apply',
+          name: 'credit_apply',
+          component: () => import('@/views/credit/CreditApply.vue')
         },
         {
           path: 'product/:id',

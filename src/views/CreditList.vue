@@ -6,7 +6,9 @@
           万事达标准双币想用卡
         </span>
         <span class="a-btn">
-          立即申请
+          <router-link :to="{path: '/home/credit/apply'}">
+            立即申请
+          </router-link>
         </span>
       </div>
       <div class="a-body">
@@ -54,6 +56,10 @@ export default {
         background: #46B211;
         border-radius: 12px;
         color: white;
+
+        a {
+          color: white;
+        }
       }
     }
 
