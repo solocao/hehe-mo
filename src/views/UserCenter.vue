@@ -1,6 +1,15 @@
 <template>
   <!-- 个人中心 -->
   <div class="user">
+    <div class="user-info">
+      <div class="user-img">
+        <img src="http://img4.imgtn.bdimg.com/it/u=4030727620,1326552346&fm=26&gp=0.jpg" />
+      </div>
+      <div class="name-mobile">
+        <p>{{user.name}}</p>
+        <p>{{user.mobile}}</p>
+      </div>
+    </div>
     <card :header="{title:'我的数据'}">
       <div slot="content" class="card-demo-flex card-demo-content01">
         <div class="vux-1px-l vux-1px-r" @click="go('books',{act:'pay'})">
@@ -74,7 +83,11 @@ export default {
     }
   },
   computed: {
+    ...mapState([
+      'user'
+    ]),
     ...mapGetters([
+
       'common_menus'
     ]),
     goods_count () {
@@ -109,6 +122,36 @@ export default {
 @import "~vux/src/styles/1px.less";
 
 .user {
+  .user-info {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    @width77: 77px;
+    > div {
+      height: @width77;
+    }
+    .user-img {
+      width: @width77;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-left: 30px;
+      background-color: #b0b6c4;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .name-mobile {
+      padding: 5px 10px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+  }
   .card-demo-flex {
     display: -webkit-box;
     display: -webkit-flex;
