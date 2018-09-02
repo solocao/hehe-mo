@@ -24,7 +24,7 @@ import { mapMutations, mapState } from 'vuex'
 export default {
   props: ['product'],
   computed: {
-    ...mapState(['loves']),
+    ...mapState(['loves', 'login']),
     heart () {
       if (this.loves.findIndex(x => x === this.product._id) > -1) {
         return 'red'
@@ -38,6 +38,10 @@ export default {
       set: 'set'
     }),
     async switchLoveHeart (productID) {
+      if (this.login !== true) {
+        this.$router.push({ path: '/login' })
+      }
+      return
       const index = this.loves.findIndex(x => x === productID)
       if (index > -1) {
         this.loves.splice(index, 1)

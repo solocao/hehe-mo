@@ -1,13 +1,14 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import { Flexbox, FlexboxItem, XHeader, Loading, XButton, XDialog, Toast, ToastPlugin } from 'vux'
 import App from './App'
 import router from './router'
 import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 import { get, post } from './api/index.js'
 import store from './store'
-import { Flexbox, FlexboxItem, XHeader, Loading, XButton, XDialog } from 'vux'
+
 import './style/app.styl'
 import 'vux/src/styles/1px.less'
 Vue.component('icon', Icon)
@@ -19,6 +20,9 @@ Vue.component('x-header', XHeader)
 Vue.component('loading', Loading)
 Vue.component('x-button', XButton)
 Vue.component('x-dialog', XDialog)
+Vue.component('toast', Toast)
+
+Vue.use(ToastPlugin)
 
 Vue.config.productionTip = false
 

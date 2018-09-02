@@ -112,6 +112,13 @@ export default {
         this.$router.push({
           path: '/home/user'
         })
+      } else {
+        this.loadShow = false
+        // 显示
+        this.$vux.toast.show({
+          type: 'text',
+          text: result.msg
+        })
       }
       console.log(result)
     },
@@ -125,7 +132,6 @@ export default {
       if (result.code === 1) {
         const url = result.data
         self.location = url
-        // console.log(url)
       }
     }
 
