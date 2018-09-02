@@ -79,6 +79,11 @@ const router = new Router({
           path: 'credit',
           name: '信用卡申请',
           component: () => import('@/views/CreditList.vue')
+        },
+        {
+          path: 'product/:id',
+          name: 'product_detail',
+          component: () => import('@/views/product/TheDetail.vue')
         }
       ]
 

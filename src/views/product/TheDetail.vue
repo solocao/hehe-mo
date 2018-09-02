@@ -10,7 +10,7 @@
             </router-link>
           </div>
           <div class="like">
-            <x-icon class="good-heart" type="heart" size="30"></x-icon>
+            <x-icon class="good-heart" type="heart" size="34"></x-icon>
           </div>
           <div class="addcart" @click="toggerSpeciPopup(1)">
             加入购物车
@@ -21,15 +21,15 @@
         </div>
 
         <swiper class="a" :aspect-ratio="1/1" dots-position="center">
-          <swiper-item v-for="item in good.imgUrlList" :key="item.id">
-            <img class="swipe-img" :src="item">
+          <swiper-item v-for="item in product.img_list" :key="item.id">
+            <img class="swipe-img" :src="item.url">
           </swiper-item>
         </swiper>
 
         <div class="good-detail-head">
-          <div class="title z-ellipsis-2">{{good.name}}</div>
+          <div class="title z-ellipsis-2">{{product.name}}</div>
           <div class="subtitle">
-            <div class="params price">￥{{good.salePrice}}</div>
+            <div class="params price">￥{{product.sale_price}}</div>
 
             <div class="params">已售{{good.soleNum}}</div>
 
@@ -158,8 +158,12 @@ export default {
     SharePopup,
     GoodParam
   },
-  data () {
+  data() {
     return {
+      product: {
+        name: '',
+        sale_price: ''
+      },
       selectParams: [],
       isActive: false,
       btnType: '',
@@ -178,25 +182,37 @@ export default {
     }
   },
   computed: {
-    scrollerHeight () {
+    scrollerHeight() {
       return 'cale(100%-130px)'
     }
   },
-  created () {
+  created() {
     this.productDetail(this.$route.params.id)
   },
   methods: {
     // 获取商品详情
-    async productDetail (id) {
-      const result = await this.get('/api/product/detail', { productId: id })
-      if (result.success) {
-        result.data.cover = 'http://www.aaebike.com:9090' + result.data.cover
-        result.data.imgUrlList = result.data.imgUrlList.map(x => 'http://www.aaebike.com:9090' + x)
-        this.good = result.data
+    async productDetail(id) {
+      const params = {
+        url: `product/item/${id}`,
+        payload: {}
       }
+      const result = await this.get(params)
+      if (result.code === 1) {
+        this.product = result.data
+      }
+
+      console.log('看看结果')
+      console.log(result)
+
+      // const result = await this.get('/api/product/detail', { productId: id })
+      // if (result.success) {
+      //   result.data.cover = 'http://www.aaebike.com:9090' + result.data.cover
+      //   result.data.imgUrlList = result.data.imgUrlList.map(x => 'http://www.aaebike.com:9090' + x)
+      //   this.good = result.data
+      // }
     },
 
-    likeHandler ($event) {
+    likeHandler($event) {
       console.log($event)
       if (this.isLike) {
         this.isLike = false
@@ -206,15 +222,15 @@ export default {
         this.good.likeNum++
       }
     },
-    resetScroller () {
+    resetScroller() {
       this.$nextTick(() => {
         this.$refs.scroller.reset()
       })
     },
-    log (str) {
+    log(str) {
       console.log(str)
     },
-    toggerSpeciPopup (type) {
+    toggerSpeciPopup(type) {
       switch (type) {
         case 0:
           this.btnType = 0
@@ -230,7 +246,7 @@ export default {
           break
       }
     },
-    paramChange (param) {
+    paramChange(param) {
       // data 存引用类型会出现奇怪的事情
       var pos = this.selectParams.indexOf(param.name)
       console.log(pos)
@@ -242,7 +258,7 @@ export default {
 
       console.log(this.selectParams)
     },
-    handleBuy () {
+    handleBuy() {
       console.log(1111)
       this.show = false
     }
@@ -256,8 +272,8 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 42px;
-  line-height: 42px;
+  height: 52px;
+  line-height: 53px;
   background-color: #fff;
   z-index: 98;
 }
@@ -266,8 +282,10 @@ export default {
   float: left;
   width: 15%;
   height: 100%;
-  text-align: center;
   color: #404040;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .good-detail-bottombar .cart .zui-icon,
 .good-detail-bottombar .like .zui-icon {
@@ -289,7 +307,7 @@ export default {
   background-color: #404040;
 }
 .good-detail-bottombar .buynow {
-  background-color: #ed7a5d;
+  background-color: #46b211;
 }
 .good-detail-head {
   padding: 8px 8px 14px;

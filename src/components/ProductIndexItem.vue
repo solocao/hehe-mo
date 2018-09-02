@@ -1,8 +1,7 @@
 <template>
   <div>
     <router-link :to="{
-					name: 'good',
-					params: {id: product._id}}">
+      path:`/home/product/${product._id}`}">
       <div class="img_wrap">
         <img :src="product.img_list[0].url" />
       </div>
