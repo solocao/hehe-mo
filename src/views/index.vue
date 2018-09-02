@@ -6,7 +6,7 @@
         <swiper :list="shopBanner">
         </swiper>
       </div>
-      <div style="width:100%;height:30px" @click="wepayOrder">
+      <div style="width:100%;height:30px" @click="wepayOrder" v-if="false">
         <x-button @click="wepayOrder">微信支付</x-button>
       </div>
       <!-- 3 * 1 显示 -->
@@ -53,7 +53,7 @@ export default {
     ProductWrap,
     WrapLink
   },
-  data () {
+  data() {
     return {
 
       shopBanner: shopBanner,
@@ -64,24 +64,24 @@ export default {
       brandList: []
     }
   },
-  created () {
+  created() {
     this.advCarousel()
     this.productList()
     this.getBrand()
   },
 
-  mounted () {
+  mounted() {
     this.index()
   },
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter(to, from, next) {
     next((vm) => {
-      vm.wxConfig()
+      // vm.wxConfig()
     })
   },
 
   methods: {
     // 获取头部的bander
-    async advCarousel () {
+    async advCarousel() {
       this.shopBanner = [{
         url: 'javascript:',
         img: 'https://www.aimatech.com/r/front/images/index/201805292.jpg',
@@ -93,7 +93,7 @@ export default {
         fallbackImg: 'https://www.aimatech.com/r/front/images/index/201805294.jpg'
       }]
     },
-    async productList () {
+    async productList() {
       const parms = {
         page: 1,
         rows: 8
@@ -105,14 +105,14 @@ export default {
       }
     },
     // 获取品牌
-    async  getBrand () {
+    async  getBrand() {
       const result = await this.get('api/brand/list')
       if (result.success) {
         result.data.list.unshift({ id: 0, name: '全部' })
         this.brandList = result.data.list
       }
     },
-    async index () {
+    async index() {
       const params = {
         url: 'bike/index',
         payload: {
@@ -127,7 +127,7 @@ export default {
       console.log(result)
     },
     // 微信配置
-    async  wxConfig () {
+    async  wxConfig() {
       let url = window.location.href
       url = url.substr(0, url.indexOf(location.hash))
       const params = {
@@ -162,7 +162,7 @@ export default {
       console.log(result)
     },
     // 下单
-    async wepayOrder () {
+    async wepayOrder() {
       const params = {
         url: 'wechat/pay/unifiedorder',
         payload: {}
