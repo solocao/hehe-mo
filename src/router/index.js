@@ -80,6 +80,11 @@ const router = new Router({
           component: () => import('@/views/shop/TheCart.vue')
         },
         {
+          path: 'shop/order',
+          name: 'shop_order',
+          component: () => import('@/views/order/OrderDetail.vue')
+        },
+        {
           path: 'coupon',
           name: '优惠券',
           component: () => import('@/views/CouponList.vue')
