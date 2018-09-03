@@ -1,70 +1,66 @@
 <template>
   <div style="height: 100%;">
-    <view-box body-padding-bottom="55px">
-      <x-header slot="header">
-        填写订单
-      </x-header>
-      <div class="address-wrap">
-        <cell-box is-link link="/address">
-          <span class="address-icon">
-            <i class="fa fa-map-marker"></i>
-          </span>
-          <div class="address-info">
-            <div class="address-name">
-              <span>阿萨德</span>
-              <span>188****0000</span>
-              <span class="address-default">默认</span>
-            </div>
-            <div class="address-detail">
-              浙江杭州余杭区天目山西路15号宏丰公寓xx号
-            </div>
+    <div class="address-wrap">
+      <cell-box is-link link="/address">
+        <span class="address-icon">
+          <i class="fa fa-map-marker"></i>
+        </span>
+        <div class="address-info">
+          <div class="address-name">
+            <span>阿萨德</span>
+            <span>188****0000</span>
+            <span class="address-default">默认</span>
           </div>
+          <div class="address-detail">
+            浙江杭州余杭区天目山西路15号宏丰公寓xx号
+          </div>
+        </div>
+      </cell-box>
+    </div>
+    <div class="address-border"></div>
+
+    <card>
+      <div slot="content">
+        <cell-box is-link class="goods-info">
+          <div class="goods-image">
+            <img src="https://img10.360buyimg.com/n4/jfs/t3271/20/5061253358/156197/16697ccd/5862361eN1147ef88.jpg" />
+            <img src="https://img10.360buyimg.com/n4/jfs/t5686/101/906090413/78425/368f2a77/592277caN7d03999a.jpg" />
+          </div>
+          <span>共2件</span>
         </cell-box>
+        <cell title="支付类型" value="在线支付"></cell>
+        <cell title="配送类型" value="京东快递"></cell>
+        <cell value="8月19日 [周六] 09:00-15:00"></cell>
+        <cell title="发票类型" value="个人发票"></cell>
       </div>
-      <div class="address-border"></div>
+    </card>
 
-      <card>
-        <div slot="content">
-          <cell-box is-link class="goods-info">
-            <div class="goods-image">
-              <img src="https://img10.360buyimg.com/n4/jfs/t3271/20/5061253358/156197/16697ccd/5862361eN1147ef88.jpg" />
-              <img src="https://img10.360buyimg.com/n4/jfs/t5686/101/906090413/78425/368f2a77/592277caN7d03999a.jpg" />
-            </div>
-            <span>共2件</span>
-          </cell-box>
-          <cell title="支付类型" value="在线支付"></cell>
-          <cell title="配送类型" value="京东快递"></cell>
-          <cell value="8月19日 [周六] 09:00-15:00"></cell>
-          <cell title="发票类型" value="个人发票"></cell>
-        </div>
-      </card>
-
-      <card>
-        <div slot="content">
-          <cell title="商品金额">
-            <div slot="value" class="text-danger">
-              ￥5354.00
-            </div>
-          </cell>
-          <cell title="运费" class="text-danger">
-            <div slot="value" class="text-danger">
-              ￥0.00
-            </div>
-          </cell>
-        </div>
-      </card>
-
-      <div slot="bottom" class="fixed-bottom">
-        <div class="order-price text-danger">
-          实付款：
-          <span class="pay-money">￥
-            <span class="big-price">5354</span>.00</span>
-        </div>
-        <div class="pay-btn bg-danger">
-          提交订单
-        </div>
+    <card>
+      <div slot="content">
+        <cell title="商品金额">
+          <div slot="value" class="text-danger">
+            ￥5354.00
+          </div>
+        </cell>
+        <cell title="运费" class="text-danger">
+          <div slot="value" class="text-danger">
+            ￥0.00
+          </div>
+        </cell>
       </div>
-    </view-box>
+    </card>
+
+    <div slot="bottom" class="fixed-bottom">
+      <div class="order-price text-danger">
+        实付款：
+        <span class="pay-money">￥
+          <span class="big-price">5354</span>.00</span>
+      </div>
+      <div class="pay-btn bg-danger">
+        提交订单
+      </div>
+    </div>
+
   </div>
 </template>
 

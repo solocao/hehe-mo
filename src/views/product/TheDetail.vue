@@ -13,9 +13,9 @@
             <x-icon type="heart" size="34"></x-icon>
           </div>
           <div class="addcart" @click="toggerSpeciPopup(1)">
-            加入购物车
+            加入购物车2
           </div>
-          <div class="buynow" @click="toggerSpeciPopup(2)">
+          <div class="buynow" @click.native="toggerSpeciPopup(2)">
             立即购买
           </div>
         </div>
@@ -116,17 +116,15 @@
             </scroller>
             <div class="foot">
               <div class="btn" v-show="btnType === 0">
-                <div class="left">加入购物车</div>
+                <div class="left">加入购物车1</div>
                 <div class="right">立即购买</div>
               </div>
-              <div class="btn" v-show="btnType === 1">
-                加入购物车
+              <div class="btn" v-show="btnType === 1" @click="addInCard">
+                加入购物车233
               </div>
-              <router-link class="btn" @click.native="handleBuy" v-show="btnType === 2" :to="{
-							name: 'goodPay'
-						}">
-                立即购买
-              </router-link>
+              <div class="btn" v-show="btnType === 2" @click="addInOrder">
+                立即购买侵权
+              </div>
             </div>
           </div>
         </popup>
@@ -231,6 +229,7 @@ export default {
       console.log(str)
     },
     toggerSpeciPopup (type) {
+      alert('asf')
       switch (type) {
         case 0:
           this.btnType = 0
@@ -261,6 +260,18 @@ export default {
     handleBuy () {
       console.log(1111)
       this.show = false
+    },
+    // 加入购物车
+    addInCard () {
+      this.$router.push({
+        path: '/home/shop/cart'
+      })
+    },
+    // 直接下单
+    addInOrder () {
+      this.$router.push({
+        path: '/home/shop/order'
+      })
     }
   }
 }

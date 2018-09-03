@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background:red">
     <router-link :to="{
       path:`/home/product/${product._id}`}">
       <div class="img_wrap">
