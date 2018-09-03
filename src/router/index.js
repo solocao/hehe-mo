@@ -77,7 +77,7 @@ const router = new Router({
         {
           path: 'shop/cart',
           name: 'shop_cart',
-          component: () => import('@/views/ShopCart.vue')
+          component: () => import('@/views/shop/TheCart.vue')
         },
         {
           path: 'coupon',

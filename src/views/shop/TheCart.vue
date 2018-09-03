@@ -1,282 +1,146 @@
 <template>
-  <div class="shopcar">
-    <div class="handle">
-      <span>编辑</span>
-      <button>移入收藏夹</button>
-      <button>删除</button>
-    </div>
-    <div class="car-item" v-for="item in shopcarList">
-      <check-icon :value.sync="item.checked" @click.native="handleCheckedItem(item)"></check-icon>
-      <div class="car-img">
-        <img src="" />
-      </div>
-      <div class="car-info">
-        <div class="goods-name">{{item.name}}</div>
-        <div class="price-count">
-          <span>￥{{item.price}}</span>
-          <CalcNumber :count.sync="item.count"></CalcNumber>
-        </div>
-      </div>
-    </div>
-    <!--猜你喜欢-->
-    <div class="guess-like">
-      <div class="guess-title">
-        <i></i>
-        <span>猜你喜欢</span>
-        <i></i>
-      </div>
-      <ul>
-        <li v-for="item in recommendList">
-          <div class="good-img-box">
-            <img src="" />
+  <div style="height: 100%;" class="cart-page">
+    <cart-shop @checkChange="checkChange" @totalChange="totalChange" :ref="'shop_'+index" v-for="(elem, index) in goods" :key="index" :shop="elem"></cart-shop>
+
+    <div slot="bottom" class="cart-btm-fixed">
+      <flexbox :gutter="0" class="cart-info">
+        <flexbox-item class="settlement-info" :span="3/4">
+          <div class="check-all-wrap">
+            <check-icon :value.sync="allChecked">全选</check-icon>
           </div>
-          <div class="good-info-box">
-            <div class="good-name">
-              {{item.name}}
-            </div>
-            <span class="good-price">￥{{item.price}}</span>
+          <div class="cart-shop-info">
+            <strong class="shp-cart-total">合计:
+              <span class="shp-cart-price">¥{{total}}</span>
+            </strong>
+            <span>总额: ¥{{total}} 立减 ¥0.00</span>
           </div>
-        </li>
-      </ul>
-    </div>
-    <!--合计结算-->
-    <div class="total-settlement vux-1px-t">
-      <check-icon :value.sync="checkedAll" @click.native="handleCheckedAll">全选</check-icon>
-      <span>合计：￥
-        <strong>123412</strong>
-      </span>
-      <button>去结算</button>
+        </flexbox-item>
+        <flexbox-item :span="1/4">
+          <div class='btn-settlement' @click="submit">去结算
+            <span class="check-num">({{checkedNum}})</span>
+          </div>
+        </flexbox-item>
+      </flexbox>
     </div>
   </div>
 </template>
 
 <script>
-import { XButton, CheckIcon } from 'vux'
-import CalcNumber from '../../components/CalcNumber.vue'
+import { ViewBox, Card, CheckIcon, XNumber, XHeader, Flexbox, FlexboxItem } from 'vux'
+import CartShop from 'components/CartShop'
+import CartProduct from 'components/CartProduct'
+import { mapActions, mapState } from 'vuex'
+
 export default {
-  name: 'shopcar',
+  components: {
+    ViewBox,
+    Card,
+    CheckIcon,
+    XNumber,
+    CartProduct,
+    CartShop,
+    XHeader,
+    Flexbox,
+    FlexboxItem
+  },
   data () {
     return {
-      checkedAll: false, // 全选
-      shopcarList: [{// 购物车的商品
-        name: 'MD100好灯，好亮的灯。MD100好灯，好亮的灯。MD100好灯，好亮的灯。',
-        price: 12342,
-        count: 1,
-        checked: false
-      }, {
-        name: 'MD100好灯，好亮的灯。',
-        price: 12342,
-        count: 1,
-        checked: true
-      }, {
-        name: 'MD100好灯，好亮的灯。MD100好灯，好亮的灯。',
-        price: 12342,
-        count: 1,
-        checked: true
-      }],
-      recommendList: [{// 推荐的商品
-        name: '这是一个推荐的灯，好靓的灯。',
-        price: 2143
-      }, {
-        name: '这是一个推荐的灯',
-        price: 2143
-      }]
+      goods: [{ shopName: 'afa', products: [{ image: 'http://img2.imgtn.bdimg.com/it/u=124172064,1501987154&fm=26&gp=0.jpg', title: 'afasfa', total: 41, num: 1 }] }]
     }
   },
-  components: {
-    XButton,
-    CheckIcon,
-    CalcNumber
+  computed: {
+    ...mapState({
+      allChecked: true,
+      checkedNum: 1,
+      total: 3
+    })
   },
+
+  mounted: function mounted () {
+    this.getShopProducts()
+  },
+
   methods: {
-    change (val) {
-      console.log('change', val)
+    ...mapActions([
+      'updateCartTotal', 'updateCartNumber', 'updateAllChecked', 'getShopProducts', 'cartSettlement'
+    ]),
+    totalChange: function () {
+      let aTotal = 0
+      let num = 0
+      for (let key in this.$refs) {
+        aTotal += this.$refs[key][0].getTotal()
+        num += this.$refs[key][0].getAllProdNumber()
+      }
+      this.updateCartTotal(aTotal)
+      this.updateCartNumber(num)
     },
-    handleCheckedItem (item) {
-      var isAll = true
-      this.shopcarList.forEach((obj) => {
-        if (obj.checked == false) {
-          isAll = false
+
+    checkChange: function (checked) {
+      let checkedNum = 0
+      for (let key in this.$refs) {
+        if (this.$refs[key][0].isChecked()) {
+          checkedNum++
         }
-      })
-      if (isAll) {
-        this.checkedAll = true
-      } else {
-        this.checkedAll = false
       }
+
+      this.updateAllChecked(checkedNum === this.goods.length)
     },
-    handleCheckedAll () {
-      if (this.checkedAll == true) {
-        this.shopcarList.forEach((obj) => {
-          obj.checked = true
-        })
-      } else {
-        this.shopcarList.forEach((obj) => {
-          obj.checked = false
-        })
-      }
+
+    submit: function () {
+      this.cartSettlement()
     }
   }
 }
 </script>
 
-<style scoped lang="less">
-@white: #ffffff;
-.handle {
-  height: 50px;
-  padding: 0px 10px;
-  background-color: @white;
-  text-align: right;
-  line-height: 50px;
-  span {
-    float: left;
-    margin-left: 20px;
-    font-size: 14px;
-  }
-  button {
-    width: 100px;
-    height: 32px;
-    background-color: #f7f8fd;
-    border: 1px solid #000000;
-  }
+<style lang="less">
+.cart-page {
+  font-size: 0.8rem;
+}
+.shop-title {
+  height: 40px;
+  line-height: 40px;
+}
+.cart-shop-info {
+  flex: 1;
+  text-align: left;
+  padding-left: 10px;
+  line-height: normal;
+}
+.check-all-wrap {
+  width: 65px;
 }
 
-.car-item {
-  height: 90px;
-  padding: 25px 13px;
-  background-color: @white;
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  > div {
-    float: left;
-  }
-  .car-img {
-    width: 90px;
-    height: 90px;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: #eaeeef;
-    margin: 0px 10px 0px 5px;
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .car-info {
-    width: calc(~"100% - 137.2px");
-    height: 100%;
-    text-wrap: wrap;
-    font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .goods-name {
-      -webkit-line-clamp: 2;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .price-count {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      button {
-        width: 20px;
-        height: 20px;
-        border: none;
-      }
-      span {
-        display: inline-block;
-        width: 30px;
-        text-align: center;
-      }
-    }
-  }
-}
-
-.guess-like {
-  width: 100%;
-  background-color: @white;
-  margin-top: 17px;
-  margin-bottom: 50px;
-  .guess-title {
-    width: 100%;
-    height: 54px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 15px;
-    i {
-      display: inline-block;
-      width: 15px;
-      height: 2px;
-      background-color: #000000;
-      margin: 0px 10px;
-    }
-  }
-  ul {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    li {
-      width: 48%;
-      .good-img-box {
-        width: 100%;
-        height: 182px;
-        background-color: #eaeeef;
-        img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-      .good-info-box {
-        height: 78px;
-        padding: 10px 20px 0px;
-        font-size: 14px;
-        .good-name {
-          height: 43px;
-          -webkit-line-clamp: 2;
-          /*用来限制在一个块元素显示的文本的行数*/
-          display: -webkit-box;
-          /*必须结合的属性，将对象作为弹性伸缩盒子模型显示*/
-          -webkit-box-orient: vertical;
-          /*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式*/
-          overflow: hidden;
-        }
-        span {
-          font-size: 16px;
-        }
-      }
-    }
-  }
-}
-.total-settlement {
-  width: 100%;
-  height: 50px;
-  padding-left: 5px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  background-color: @white;
+.cart-btm-fixed {
   position: fixed;
-  bottom: 50px;
-  left: 0px;
+  bottom: 0;
+  width: 100%;
+  height: 55px;
+  font-size: 12px;
+  z-index: 9999;
+}
+.vux-flexbox-item {
+  height: 100%;
+  line-height: 55px;
+  text-align: center;
+}
+.btn-settlement {
+  color: #fff;
+  background-color: #f23030;
+  font-size: 16px;
+  .check-num {
+    font-size: 12px;
+  }
+}
+.cart-info {
+  background-color: #fff;
+}
+.settlement-info {
+  height: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  button {
-    width: 90px;
-    height: 100%;
-    border: none;
-    background-color: #393a3f;
-    color: @white;
-  }
-  strong {
-    display: inline-block;
-    font-size: 18px;
-    padding-bottom: 6px;
-  }
+}
+.shp-cart-total {
+  display: block;
+  margin-top: 11px;
 }
 </style>
