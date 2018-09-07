@@ -1,7 +1,7 @@
 <template>
   <div style="height: 100%;">
     <div class="address-wrap">
-      <cell-box is-link link="/address">
+      <cell-box is-link link="/home/user/address/list">
         <span class="address-icon">
           <i class="fa fa-map-marker"></i>
         </span>
@@ -55,7 +55,7 @@
         <span class="pay-money">￥
           <span class="big-price">{{totalPrice}}</span>.00</span>
       </div>
-      <div class="pay-btn bg-danger">
+      <div class="pay-btn bg-danger" @click="submitOrder">
         提交订单
       </div>
     </div>
@@ -95,7 +95,35 @@ export default {
   methods: {
     // 提交订单
     async submitOrder () {
+      // 看看商品
+      // console.log(this.product)
+      // const { name, sale_price, _id, img_list } = this.product
+      // const productList = [{
+      //   product_id: _id,
+      //   name: name,
+      //   img: img_list[0].url,
+      //   price: sale_price,
+      //   count: 1
+      // }]
 
+      // const params = {
+      //   url: 'order/add',
+      //   payload: {
+      //     product_list: JSON.stringify(productList)
+      //   },
+      //   auth: true
+      // }
+      // const result = await this.post(params)
+      // if (result.code === 1) {
+      //   const preOrder = {
+      //     productList: productList
+      //   }
+      //   this.set({ preOrder: preOrder })
+      //   this.$router.push({
+      //     path: '/home/shop/order'
+      //   })
+      // }
+      this.$router.push({ path: '/home/user/order' })
     }
 
   }

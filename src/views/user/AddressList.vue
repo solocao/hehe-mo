@@ -1,9 +1,25 @@
 <template>
   <div>
     <div class="location">
+
       <group v-for="(item,index) in common_address" :key="index" v-if="item.mobile">
-        <x-switch :title="item.name+'  '+item.mobile" prevent-default v-model="item.isUsed" @on-click="changeSwitch(item)"></x-switch>
-        <cell :title="item.addrName" :inline-desc="item.address" :link="{path:'/locationForm',query:{id:item.id}}"></cell>
+        <div class="address-wrap">
+          <cell-box is-link link="/home/user/address/edit">
+            <span class="address-icon">
+              <i class="fa fa-map-marker"></i>
+            </span>
+            <div class="address-info">
+              <div class="address-name">
+                <span>{{item.name}}</span>
+                <span>{{item.mobile}}</span>
+                <span class="address-default">默认</span>
+              </div>
+              <div class="address-detail">
+                {{item.address}}
+              </div>
+            </div>
+          </cell-box>
+        </div>
       </group>
     </div>
     <div>

@@ -270,8 +270,6 @@ export default {
     },
     // 直接下单
     async addOrder () {
-      // 看看商品
-      console.log(this.product)
       const { name, sale_price, _id, img_list } = this.product
       const productList = [{
         product_id: _id,
@@ -281,23 +279,13 @@ export default {
         count: 1
       }]
 
-      const params = {
-        url: 'order/add',
-        payload: {
-          product_list: JSON.stringify(productList)
-        },
-        auth: true
+      const preOrder = {
+        productList: productList
       }
-      const result = await this.post(params)
-      if (result.code === 1) {
-        const preOrder = {
-          productList: productList
-        }
-        this.set({ preOrder: preOrder })
-        this.$router.push({
-          path: '/home/shop/order'
-        })
-      }
+      this.set({ preOrder: preOrder })
+      this.$router.push({
+        path: '/home/shop/order'
+      })
     }
   }
 }
