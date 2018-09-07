@@ -1,6 +1,8 @@
 <template>
   <div style="height: 100%;" class="cart-page">
-    <cart-shop @checkChange="checkChange" @totalChange="totalChange" :ref="'shop_'+index" v-for="(elem, index) in goods" :key="index" :shop="elem"></cart-shop>
+    <!-- <cart-shop @checkChange="checkChange" @totalChange="totalChange" :ref="'shop_'+index" v-for="(elem, index) in cart" :key="index" :shop="elem"></cart-shop> -->
+
+    <cart-product v-for="item in cart" :prod="item" @change="checkProduct" @on-total-price="onTotalPrice" :ref="'prod'+item.product_id" :key="item.product_id"></cart-product>
 
     <div slot="bottom" class="cart-btm-fixed">
       <flexbox :gutter="0" class="cart-info">
@@ -45,24 +47,18 @@ export default {
   },
   data () {
     return {
-      goods: [{ shopName: 'afa', products: [{ image: 'http://img2.imgtn.bdimg.com/it/u=124172064,1501987154&fm=26&gp=0.jpg', title: 'afasfa', total: 41, num: 1 }] }]
+      goods: [{ shopName: 'afa', products: [{ image: 'http://img2.imgtn.bdimg.com/it/u=124172064,1501987154&fm=26&gp=0.jpg', title: 'afasfa', total: 41, num: 1 }] }],
+      total: 123,
+      checkedNum: 2
     }
   },
   computed: {
-    ...mapState({
-      allChecked: true,
-      checkedNum: 1,
-      total: 3
-    })
-  },
-
-  mounted: function mounted () {
-    this.getShopProducts()
+    ...mapState(['cart'])
   },
 
   methods: {
     ...mapActions([
-      'updateCartTotal', 'updateCartNumber', 'updateAllChecked', 'getShopProducts', 'cartSettlement'
+      'updateCartTotal', 'updateCartNumber', 'updateAllChecked', 'cartSettlement'
     ]),
     totalChange: function () {
       let aTotal = 0

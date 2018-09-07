@@ -5,10 +5,10 @@
     </div>
     <div class="goods-info">
       <div class="goods-img">
-        <img :src="prod.image" />
+        <img :src="prod.img" />
       </div>
       <div class="goods-name">
-        {{prod.title}}
+        {{prod.name}}
       </div>
       <div class="goods-prop">
         <i class="prop" style="font-style:normal">重量:11.24kg</i>
@@ -17,9 +17,9 @@
       </div>
       <div class="goods-price-wrap">
         <span>￥</span>
-        <strong>{{prod.total}}</strong>
+        <strong>{{prod.price}}</strong>
         <span style="float:right">
-          <inline-x-number width="30px" :min="0" :value="prod.num" @on-change="numChange"></inline-x-number>
+          <inline-x-number width="30px" :min="0" :value="prod.count" @on-change="numChange"></inline-x-number>
         </span>
       </div>
     </div>
@@ -50,21 +50,21 @@ export default {
   },
 
   methods: {
-    numChange(value) {
+    numChange (value) {
       this.prod.num = value
       this.prod.total = this.prod.num * this.prod.price
       this.$emit('on-total-price', this.prod.total)
     },
-    setChecked(checked) {
+    setChecked (checked) {
       this.checked = checked
     },
-    getChecked() {
+    getChecked () {
       return this.checked
     },
-    getTotal() {
+    getTotal () {
       return this.prod.total
     },
-    getNumber() {
+    getNumber () {
       return this.prod.num
     }
   }

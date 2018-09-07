@@ -13,7 +13,7 @@
             <x-icon type="heart" size="34"></x-icon>
           </div>
           <div class="addcart" @click="toggerSpeciPopup(1)">
-            加入购物车2
+            加入购物车
           </div>
           <div class="buynow" @click="toggerSpeciPopup(2)">
             立即购买
@@ -108,7 +108,7 @@
                   <good-param :item="item" @paramChange="paramChange" />
                 </div>
                 <div class="param-item">
-                  <x-number class="add-num" :title="'数量'" :value="1" :min="1" :step="1" width="30px">
+                  <x-number class="add-num" :title="'数量'" :value="num" :min="1" :step="1" width="30px">
                   </x-number>
                 </div>
               </div>
@@ -118,8 +118,8 @@
                 <div class="left">加入购物车1</div>
                 <div class="right">立即购买</div>
               </div>
-              <div class="btn" v-show="btnType === 1" @click="addInCard">
-                加入购物车233
+              <div class="btn" v-show="btnType === 1" @click="addCard">
+                加入购物车
               </div>
               <div class="btn" v-show="btnType === 2" @click="addOrder">
                 立即购买
@@ -161,6 +161,7 @@ export default {
         name: '',
         sale_price: ''
       },
+      num: 1,
       selectParams: [],
       isActive: false,
       btnType: '',
@@ -179,6 +180,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['cart']),
     scrollerHeight () {
       return 'cale(100%-130px)'
     }
@@ -263,7 +265,24 @@ export default {
       this.show = false
     },
     // 加入购物车
-    addInCard () {
+    addCard () {
+      const cart = this.cart
+      const { name, sale_price, _id, img_list } = this.product
+      const index = cart.findIndex(x => x._id === _id)
+      if (index === -1) {
+        cart.push({
+          product_id: _id,
+          name: name,
+          img: img_list[0].url,
+          price: sale_price,
+          count: this.num
+        })
+        this.set({ cart: cart })
+      } else {
+        cart[index].count = cart[index].count + this.num
+        this.set({ cart: cart })
+      }
+
       this.$router.push({
         path: '/home/shop/cart'
       })

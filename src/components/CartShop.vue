@@ -1,10 +1,7 @@
 <template>
   <card>
-    <div slot="header" class="shop-title" style="padding: 0 10px;">
-      <check-icon :value.sync="checked" @update:value="checkSub">{{shop.shopName}}</check-icon>
-    </div>
     <ul slot="content">
-      <li v-for="prod in shop.products" :key="prod.id">
+      <li v-for="prod in shop" :key="prod.id">
         <cart-product :prod="prod" @change="checkProduct" @on-total-price="onTotalPrice" :ref="'prod'+prod.id"></cart-product>
       </li>
     </ul>
@@ -27,9 +24,9 @@ export default {
   },
   data: function () {
     return {
-      checkedNum: this.shop.products.length,
-      checked: true,
-      total: 0
+      // checkedNum: this.shop.products.length,
+      // checked: true,
+      // total: 0
     }
   },
   methods: {
@@ -66,11 +63,11 @@ export default {
       return this.total
     },
 
-    isChecked () {
+    isChecked() {
       return this.checked
     },
 
-    getAllProdNumber () {
+    getAllProdNumber() {
       let total = 0
       for (let i in this.$refs) {
         let prod = this.$refs[i][0]
@@ -81,6 +78,9 @@ export default {
 
       return total
     }
+  },
+  mounted() {
+    console.log(this.shop)
   },
 
   watch: {
