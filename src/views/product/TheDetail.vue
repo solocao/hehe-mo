@@ -155,7 +155,7 @@ export default {
     SharePopup,
     GoodParam
   },
-  data () {
+  data() {
     return {
       product: {
         name: '',
@@ -181,11 +181,11 @@ export default {
   },
   computed: {
     ...mapState(['cart']),
-    scrollerHeight () {
+    scrollerHeight() {
       return 'cale(100%-130px)'
     }
   },
-  created () {
+  created() {
     this.productDetail(this.$route.params.id)
   },
   methods: {
@@ -193,7 +193,7 @@ export default {
       set: 'set'
     }),
     // 获取商品详情
-    async productDetail (id) {
+    async productDetail(id) {
       const params = {
         url: `product/item/${id}`,
         payload: {}
@@ -214,7 +214,7 @@ export default {
       // }
     },
 
-    likeHandler ($event) {
+    likeHandler($event) {
       console.log($event)
       if (this.isLike) {
         this.isLike = false
@@ -224,15 +224,15 @@ export default {
         this.good.likeNum++
       }
     },
-    resetScroller () {
+    resetScroller() {
       this.$nextTick(() => {
         this.$refs.scroller.reset()
       })
     },
-    log (str) {
+    log(str) {
       console.log(str)
     },
-    toggerSpeciPopup (type) {
+    toggerSpeciPopup(type) {
       switch (type) {
         case 0:
           this.btnType = 0
@@ -248,7 +248,7 @@ export default {
           break
       }
     },
-    paramChange (param) {
+    paramChange(param) {
       // data 存引用类型会出现奇怪的事情
       var pos = this.selectParams.indexOf(param.name)
       console.log(pos)
@@ -260,15 +260,15 @@ export default {
 
       console.log(this.selectParams)
     },
-    handleBuy () {
+    handleBuy() {
       console.log(1111)
       this.show = false
     },
     // 加入购物车
-    addCard () {
+    addCard() {
       const cart = this.cart
       const { name, sale_price, _id, img_list } = this.product
-      const index = cart.findIndex(x => x._id === _id)
+      const index = cart.findIndex(x => x.product_id === _id)
       if (index === -1) {
         cart.push({
           product_id: _id,
@@ -279,16 +279,16 @@ export default {
         })
         this.set({ cart: cart })
       } else {
+        alert('当然是有啦')
         cart[index].count = cart[index].count + this.num
         this.set({ cart: cart })
       }
-
       this.$router.push({
         path: '/home/shop/cart'
       })
     },
     // 直接下单
-    async addOrder () {
+    async addOrder() {
       const { name, sale_price, _id, img_list } = this.product
       const productList = [{
         product_id: _id,
