@@ -25,28 +25,33 @@ export default {
         {
           name: '首页',
           iconCls: 'zui-icon-INDEX_1',
-          link: 'index',
+          link: '/home/index',
           icon: 'home'
         },
         {
           name: '精彩',
           iconCls: 'zui-icon-TEA',
-          link: 'active',
+          link: '/home/active',
           icon: 'calendar'
         },
         {
           name: '优惠券',
           iconCls: 'zui-icon-SHOPPING-CART-EMPTY',
-          link: 'coupon',
+          link: '/home/coupon',
           icon: 'birthday-cake'
         },
         {
           name: '我的',
           iconCls: 'zui-icon-MINE_1',
-          link: 'user',
+          link: '/home/user',
           icon: 'user'
         }
       ]
+    }
+  },
+  methods: {
+    go () {
+      alert('asf')
     }
   }
 }

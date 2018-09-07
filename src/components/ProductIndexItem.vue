@@ -1,5 +1,5 @@
 <template>
-  <div style="background:red">
+  <div>
     <router-link :to="{
       path:`/home/product/${product._id}`}">
       <div class="img_wrap">
@@ -13,7 +13,6 @@
           ￥{{product.sale_price}}
         </div>
       </div>
-
     </router-link>
     <x-icon class="good-heart" @click.native="switchLoveHeart(product._id)" type="heart" size="30" :style="{ fill: heart }"></x-icon>
   </div>

@@ -7,6 +7,8 @@ const state = {
   loves: [],
   demo: '测试',
   // 购物车
-  cart: []
+  cart: [],
+  // 预购买
+  preOrder: null
 }
 export default state

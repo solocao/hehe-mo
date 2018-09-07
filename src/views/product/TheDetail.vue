@@ -15,7 +15,7 @@
           <div class="addcart" @click="toggerSpeciPopup(1)">
             加入购物车2
           </div>
-          <div class="buynow" @click.native="toggerSpeciPopup(2)">
+          <div class="buynow" @click="toggerSpeciPopup(2)">
             立即购买
           </div>
         </div>
@@ -66,8 +66,7 @@
               <router-link class="back" :to="{
 							name: 'index'
 						}">
-                <!-- <span class="zui-icon zui-icon-INDEX_1"></span> -->
-                进入生活馆
+                进入品牌馆
               </router-link>
             </div>
           </div>
@@ -82,11 +81,11 @@
           <div class="head">
             评价
             <span class="comment-num">({{good.commentsLength}}人评价)</span>
-            <router-link class="comment-all" :to="{
+            <!-- <router-link class="comment-all" :to="{
 						name: 'commentList'
 					}">
               查看全部
-            </router-link>
+            </router-link> -->
           </div>
           <comment-card :type="'part'" v-for="item in good.commentsPart" :comment="item" :key="item.id">
           </comment-card>
@@ -96,10 +95,10 @@
           <div class="good-params-popup-wrap">
             <div class="head">
               <div class="img">
-                <img src="/static/img/good-default.jpg" alt="">
+                <img :src="product.img_list[0].url" alt="">
               </div>
               <div class="title">
-                <span class="price">￥{{good.salePrice}}</span>
+                <span class="price">￥{{product.sale_price}}</span>
                 <span class="inventory">(库存{{good.maxInventory}}件)</span>
               </div>
             </div>
@@ -122,8 +121,8 @@
               <div class="btn" v-show="btnType === 1" @click="addInCard">
                 加入购物车233
               </div>
-              <div class="btn" v-show="btnType === 2" @click="addInOrder">
-                立即购买侵权
+              <div class="btn" v-show="btnType === 2" @click="addOrder">
+                立即购买
               </div>
             </div>
           </div>
@@ -138,7 +137,7 @@ import GoodParam from 'components/Goodparam.vue'
 import SharePopup from 'components/SharePopup.vue'
 import CommentCard from 'components/CommentCard.vue'
 import { Flexbox, FlexboxItem, Swiper, SwiperItem, Cell, Popup, Scroller, Toast, ViewBox, XSwitch, XNumber } from 'vux'
-
+import { mapMutations, mapState } from 'vuex'
 export default {
   components: {
     Popup,
@@ -188,6 +187,9 @@ export default {
     this.productDetail(this.$route.params.id)
   },
   methods: {
+    ...mapMutations({
+      set: 'set'
+    }),
     // 获取商品详情
     async productDetail (id) {
       const params = {
@@ -229,7 +231,6 @@ export default {
       console.log(str)
     },
     toggerSpeciPopup (type) {
-      alert('asf')
       switch (type) {
         case 0:
           this.btnType = 0
@@ -268,10 +269,35 @@ export default {
       })
     },
     // 直接下单
-    addInOrder () {
-      this.$router.push({
-        path: '/home/shop/order'
-      })
+    async addOrder () {
+      // 看看商品
+      console.log(this.product)
+      const { name, sale_price, _id, img_list } = this.product
+      const productList = [{
+        product_id: _id,
+        name: name,
+        img: img_list[0].url,
+        price: sale_price,
+        count: 1
+      }]
+
+      const params = {
+        url: 'order/add',
+        payload: {
+          product_list: JSON.stringify(productList)
+        },
+        auth: true
+      }
+      const result = await this.post(params)
+      if (result.code === 1) {
+        const preOrder = {
+          productList: productList
+        }
+        this.set({ preOrder: preOrder })
+        this.$router.push({
+          path: '/home/shop/order'
+        })
+      }
     }
   }
 }
@@ -558,7 +584,9 @@ export default {
   padding-bottom: 2px;
 }
 .good-params-popup-wrap .foot .btn {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -566,9 +594,9 @@ export default {
   overflow: hidden;
   text-align: center;
   font-size: 15px;
-  line-height: 2.3;
+  line-height: 46px;
   color: #fff;
-  background-color: #ed7a5d;
+  background-color: #4caf50;
 }
 .good-params-popup-wrap .foot .btn .left {
   float: left;

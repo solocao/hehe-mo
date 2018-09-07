@@ -40,6 +40,21 @@ const router = new Router({
           component: () => import('@/views/user/TheCenter.vue')
         },
         {
+          path: 'user/address/list',
+          name: 'user_address_list',
+          component: () => import('@/views/user/AddressList.vue')
+        },
+        {
+          path: 'user/address/new',
+          name: 'user_address_new',
+          component: () => import('@/views/user/AddressNew.vue')
+        },
+        {
+          path: 'user/address/edit',
+          name: 'user_address_edit',
+          component: () => import('@/views/user/AddressEdit.vue')
+        },
+        {
           path: 'user/credit',
           name: 'user_credit',
           component: () => import('@/views/credit/CreditList.vue')

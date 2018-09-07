@@ -23,13 +23,12 @@
       <div slot="content">
         <cell-box is-link class="goods-info">
           <div class="goods-image">
-            <img src="https://img10.360buyimg.com/n4/jfs/t3271/20/5061253358/156197/16697ccd/5862361eN1147ef88.jpg" />
-            <img src="https://img10.360buyimg.com/n4/jfs/t5686/101/906090413/78425/368f2a77/592277caN7d03999a.jpg" />
+            <img v-for="item in preOrder.productList" :src="item.img" alt="" :key="item.product_id">
           </div>
-          <span>共2件</span>
+          <span>共{{preOrder.productList.length}}件</span>
         </cell-box>
         <cell title="支付类型" value="在线支付"></cell>
-        <cell title="配送类型" value="京东快递"></cell>
+        <cell title="配送类型" value="厂家发货"></cell>
         <cell value="8月19日 [周六] 09:00-15:00"></cell>
         <cell title="发票类型" value="个人发票"></cell>
       </div>
@@ -39,7 +38,7 @@
       <div slot="content">
         <cell title="商品金额">
           <div slot="value" class="text-danger">
-            ￥5354.00
+            ￥{{totalPrice}}
           </div>
         </cell>
         <cell title="运费" class="text-danger">
@@ -54,7 +53,7 @@
       <div class="order-price text-danger">
         实付款：
         <span class="pay-money">￥
-          <span class="big-price">5354</span>.00</span>
+          <span class="big-price">{{totalPrice}}</span>.00</span>
       </div>
       <div class="pay-btn bg-danger">
         提交订单
@@ -66,6 +65,7 @@
 
 <script>
 import { ViewBox, Card, CheckIcon, XHeader, Cell, CellBox } from 'vux'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
   components: {
@@ -74,6 +74,30 @@ export default {
     XHeader,
     Cell,
     CellBox
+  },
+  data () {
+    return {
+
+    }
+  },
+  computed: {
+    ...mapState(['preOrder']),
+    totalPrice () {
+      const productList = this.preOrder.productList
+      let totalPrice = 0
+      productList.forEach((x) => {
+        totalPrice = totalPrice + x.price * x.count
+      })
+      return totalPrice
+    }
+
+  },
+  methods: {
+    // 提交订单
+    async submitOrder () {
+
+    }
+
   }
 }
 </script>
@@ -138,6 +162,7 @@ export default {
   width: 100%;
   height: 55px;
   background: #fff;
+  z-index: 999;
   display: flex;
   > div {
     height: 100%;
@@ -161,6 +186,9 @@ export default {
     .big-price {
       font-size: 14px;
     }
+  }
+  .bg-danger {
+    background: #4fbb0f;
   }
 }
 </style>
