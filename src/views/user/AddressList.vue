@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="location">
-
       <group v-for="(item,index) in common_address" :key="index" v-if="item.mobile">
         <div class="address-wrap">
           <cell-box is-link link="/home/user/address/edit">
@@ -12,7 +11,7 @@
               <div class="address-name">
                 <span>{{item.name}}</span>
                 <span>{{item.mobile}}</span>
-                <span class="address-default">默认</span>
+                <span class="address-default" v-if="item.active ===1">默认地址</span>
               </div>
               <div class="address-detail">
                 {{item.address}}
@@ -61,7 +60,7 @@ export default {
     ...mapState(['user'])
   },
   created () {
-    this.$store.dispatch('getAddress')
+
   },
   mounted () {
     this.addressList()
@@ -78,6 +77,8 @@ export default {
       const result = await this.get(params)
       if (result.code === 1) {
         this.common_address = result.data
+        console.log('看看地址')
+        console.log(this.common_address)
       }
     },
     changeSwitch (item, newVal, oldVal) {

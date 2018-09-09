@@ -12,13 +12,13 @@
           </div>
           <div class="cart-shop-info">
             <strong class="shp-cart-total">合计:
-              <span class="shp-cart-price">¥{{total}}</span>
+              <span class="shp-cart-price">¥{{totalPrice}}</span>
             </strong>
-            <span>总额: ¥{{total}} 立减 ¥0.00</span>
+            <span>总额: ¥{{totalPrice}} 立减 ¥0.00</span>
           </div>
         </flexbox-item>
         <flexbox-item :span="1/4">
-          <div class='btn-settlement' @click="submit">去结算
+          <div class='btn-settlement' @click="addOrder">去结算
             <span class="check-num">({{checkedNum}})</span>
           </div>
         </flexbox-item>
@@ -48,18 +48,53 @@ export default {
   data () {
     return {
       goods: [{ shopName: 'afa', products: [{ image: 'http://img2.imgtn.bdimg.com/it/u=124172064,1501987154&fm=26&gp=0.jpg', title: 'afasfa', total: 41, num: 1 }] }],
-      total: 123,
-      checkedNum: 2
+      total: 123
     }
   },
   computed: {
-    ...mapState(['cart'])
+    ...mapState(['cart']),
+    checkedNum () {
+      let totalNum = 0
+      this.cart.forEach(x => {
+        totalNum = totalNum + x.count
+      })
+      return totalNum
+    },
+    totalPrice () {
+      let totalPrice = 0
+      this.cart.forEach(x => {
+        totalPrice = totalPrice + x.price * x.count
+      })
+      return totalPrice
+    }
   },
 
   methods: {
     ...mapActions([
       'updateCartTotal', 'updateCartNumber', 'updateAllChecked', 'cartSettlement'
     ]),
+    // 直接下单
+    async addOrder () {
+      console.log(this.cart)
+      alert('asf')
+      return 'saf'
+      const { name, sale_price, _id, img_list } = this.product
+      const productList = [{
+        product_id: _id,
+        name: name,
+        img: img_list[0].url,
+        price: sale_price,
+        count: 1
+      }]
+
+      const preOrder = {
+        productList: productList
+      }
+      this.set({ preOrder: preOrder })
+      this.$router.push({
+        path: '/home/shop/order'
+      })
+    },
     totalChange: function () {
       let aTotal = 0
       let num = 0
@@ -122,7 +157,7 @@ export default {
 }
 .btn-settlement {
   color: #fff;
-  background-color: #f23030;
+  background-color: #46b211;
   font-size: 16px;
   .check-num {
     font-size: 12px;
